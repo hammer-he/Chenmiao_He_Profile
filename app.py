@@ -2,7 +2,7 @@ import streamlit as st
 
 # 1. 页面配置：增加了个性化标题和页面布局
 st.set_page_config(
-    page_title="何晨苗 (Miao) | 体育教育与数据科学", 
+    page_title="何晨苗 (Meow)", 
     page_icon="🥊", 
     layout="wide"
 )
@@ -17,7 +17,7 @@ st.markdown("""
         width: 100%;
         border-radius: 5px;
         height: 3em;
-        background-color: #800000; /* 春田学院 Maroon 色 */
+        background-color: #800000;
         color: white;
     }
     </style>
@@ -26,14 +26,15 @@ st.markdown("""
 # 2. 侧边栏：头像与联系方式
 with st.sidebar:
     st.image("https://via.placeholder.com/200x200.png?text=Miao+He", caption="何晨苗 (Miao)")
-    st.title("📍 联系方式")
-    st.write("📧 **Email:** chenmiaohe7@gmail.com")
-    st.write("🏛️ **School:** Springfield College")
-    st.write("🌍 **From:** Beijing Sport University")
+    st.subheader("📍 联系方式")
     
-    st.markdown("---")
-    st.markdown("### 🔍 研究兴趣")
-    st.caption("• 循证体育实践 (EBP)\n• 运动表现分析\n• 跨文化体育教育")
+    st.markdown("📧 **Email**")
+    st.caption("chenmiaohe7@gmail.com")
+    st.caption("602471974@qq.com")
+    
+    st.markdown("📱 **Phone**")
+    st.caption("🇨🇳 +86 15897472620")
+    st.caption("🇺🇸 +1 4132725040")
 
 # 3. 主界面：核心简介
 col1, col2 = st.columns([2, 1], gap="large")
