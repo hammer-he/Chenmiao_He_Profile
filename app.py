@@ -21,7 +21,7 @@ st.markdown("""
 # 2. 侧边栏
 with st.sidebar:
     # 💡 提示：请确保你的 GitHub 仓库里有一个 012.jpg 文件（PSD格式网页打不开哦）
-    st.image("012.jpg", caption="何晨苗 (Meow)") 
+    st.image("012.psd", caption="何晨苗 (Meow)") 
     st.subheader("📍 联系方式")
     st.markdown("📧 **Email**")
     st.caption("chenmiaohe7@gmail.com")
