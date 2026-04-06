@@ -25,7 +25,7 @@ st.markdown("""
 
 # 2. 侧边栏：头像与联系方式
 with st.sidebar:
-    st.image("012.psd", caption="何晨苗 (Miao)")
+    st.image("012.psd", caption="何晨苗 (Meow)")
     st.subheader("📍 联系方式")
     
     st.markdown("📧 **Email**")
@@ -40,24 +40,19 @@ with st.sidebar:
 col1, col2 = st.columns([2, 1], gap="large")
 
 with col1:
-    st.title("你好，我是 何晨苗 (Miao) 👋")
+    st.title("您好，我是 何晨苗 (Meow) 👋")
     st.markdown("""
-    ### **体育教育者 / 数据科学探索者**
+    ### **循证运动实践/数据科学/运动表现分析/体育教育/拳击**
     
-    我目前就读于 **美国春田学院 (Springfield College)**。我致力于将 **北京体育大学** 扎实的竞技体育理论与国际前沿的 **循证体育科学 (Evidence-based Practice)** 相结合。
-    
-    我的目标是利用数据驱动的方法优化运动表现，并探索体育教育在不同文化背景下的创新路径。
     """)
 
 with col2:
     st.write("### 📈 个人成长图谱")
     # 这里的进度可以根据你的实际备考/学业进度调整
-    st.write("MTEL 备考进度")
-    st.progress(75)
-    st.write("数据科学技能 (Python/R)")
-    st.progress(60)
-    st.write("拳击教学资质")
-    st.progress(90)
+    st.write("世界拳击冠军")
+    st.progress(20)
+    st.write("清华大学博士")
+    st.progress(50)
 
 st.markdown("---")
 
