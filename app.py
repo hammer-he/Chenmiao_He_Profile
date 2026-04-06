@@ -25,7 +25,7 @@ st.markdown("""
 
 # 2. 侧边栏：头像与联系方式
 with st.sidebar:
-    st.image("https://via.placeholder.com/200x200.png?text=Miao+He", caption="何晨苗 (Miao)")
+    st.image("012.psd", caption="何晨苗 (Miao)")
     st.subheader("📍 联系方式")
     
     st.markdown("📧 **Email**")
