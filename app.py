@@ -41,10 +41,9 @@ with col2:
     st.write("### 📈 个人成长图谱")
     st.write("北京体育大学硕士毕业")
     st.progress(80)
-    st.write("申请清华大学体育博士")
+    st.write("申请")
     st.progress(30)
-    st.write("拳击世界冠军")
-    st.progress(20)
+    
 
 st.markdown("---")
 
