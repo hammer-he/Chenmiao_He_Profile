@@ -8,31 +8,20 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# ══════════════════════════════════════════════════════════════
-#  BILINGUAL CONTENT DICTIONARY
-#  PMS 202 · #862633 · RGB(134, 38, 51)
-# ══════════════════════════════════════════════════════════════
 TEXTS = {
     "zh": {
-        # ── Sidebar ──
         "lang_options": ["中文", "English"],
         "lang_label":   "语言 / Language",
         "sidebar_name": "何晨苗 (Meow)",
         "contact_title": "联系方式",
         "email_label":  "📧 邮箱",
         "phone_label":  "📱 电话",
-
-        # ── Hero ──
         "hero_title":   "您好，我是何晨苗 (Meow) 👋",
         "hero_focus":   "**研究方向：** `拳击` `运动表现分析` `循证运动实践` `体育教育`",
-
-        # ── Tabs ──
         "tab_edu":      "🎓 教育背景",
         "tab_exp":      "💼 实践经验",
         "tab_res":      "🔬 科研成果",
         "tab_hon":      "🏅 荣誉与技能",
-
-        # ── Education ──
         "edu_title":    "教育背景",
         "edu": [
             {
@@ -60,8 +49,6 @@ TEXTS = {
                 "courses":  "体育管理学 · 篮球 · 足球 · 羽毛球 · 体育舞蹈 · 空手道",
             },
         ],
-
-        # ── Experience ──
         "exp_title":    "实践经验",
         "exp": [
             {
@@ -95,8 +82,6 @@ TEXTS = {
                 ],
             },
         ],
-
-        # ── Research ──
         "res_title":        "科研成果",
         "res_focus_label":  "研究方向",
         "res_focus_body":   "拳击技术动作自动化评估 · 新入职体育教师专业发展支持",
@@ -111,8 +96,6 @@ TEXTS = {
             "**Meta分析**：运动锻炼对电子产品成瘾的干预效果（团队协作，进行中）",
             "**系统综述**：题目待定（独立项目，方案设计阶段）",
         ],
-
-        # ── Honours & Skills ──
         "hon_title":        "荣誉与技能",
         "awards_label":     "学术奖项",
         "awards": [
@@ -130,7 +113,6 @@ TEXTS = {
             "中文 — 母语",
             "英语 — TOEFL iBT 93",
         ],
-        "certs_label":      "职业资格证书",
         "certs_sport": [
             "国家二级拳击运动员证",
             "国家二级拳击裁判员证",
@@ -157,25 +139,18 @@ TEXTS = {
     },
 
     "en": {
-        # ── Sidebar ──
         "lang_options": ["中文", "English"],
         "lang_label":   "语言 / Language",
         "sidebar_name": "He Chenmiao (Meow)",
         "contact_title": "Contact",
         "email_label":  "📧 Email",
         "phone_label":  "📱 Phone",
-
-        # ── Hero ──
         "hero_title":   "Hi, I'm He Chenmiao (Meow) 👋",
         "hero_focus":   "**Research Focus:** `Boxing` `Sports Performance Analysis` `Evidence-Based Practice` `Physical Education`",
-
-        # ── Tabs ──
         "tab_edu":      "🎓 Education",
         "tab_exp":      "💼 Experience",
         "tab_res":      "🔬 Research",
         "tab_hon":      "🏅 Honours & Skills",
-
-        # ── Education ──
         "edu_title":    "Education",
         "edu": [
             {
@@ -203,8 +178,6 @@ TEXTS = {
                 "courses":  "Sport Management · Basketball · Football · Badminton · Sport Dance · Karate",
             },
         ],
-
-        # ── Experience ──
         "exp_title":    "Professional Experience",
         "exp": [
             {
@@ -238,8 +211,6 @@ TEXTS = {
                 ],
             },
         ],
-
-        # ── Research ──
         "res_title":        "Research",
         "res_focus_label":  "Research Focus",
         "res_focus_body":   "Automated assessment of boxing technical movements · Professional support for newly employed PE teachers",
@@ -254,8 +225,6 @@ TEXTS = {
             "**Meta-Analysis**: Effect of exercise interventions on electronic device addiction (team project, in progress)",
             "**Systematic Review**: Title in development (independent, protocol stage)",
         ],
-
-        # ── Honours & Skills ──
         "hon_title":        "Honours & Skills",
         "awards_label":     "Academic Awards",
         "awards": [
@@ -273,7 +242,6 @@ TEXTS = {
             "Chinese — Native",
             "English — TOEFL iBT 93",
         ],
-        "certs_label":      "Professional Certifications",
         "certs_sport": [
             "National Level-2 Boxing Athlete Certificate",
             "National Level-2 Boxing Referee Certificate",
@@ -306,17 +274,14 @@ TEXTS = {
 st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap');
-
 html, body, [class*="css"] { font-family: 'Inter', sans-serif; }
 .main { background-color: #fdf8f8; }
 
-/* ── Sidebar ── */
 [data-testid="stSidebar"] { background: #1c0508; }
 [data-testid="stSidebar"] * { color: #f5e8ea !important; }
 [data-testid="stSidebar"] .stRadio label { font-size: 0.9rem; padding: 4px 0; }
 [data-testid="stSidebar"] hr { border-color: #4a1520 !important; }
 
-/* ── Hero ── */
 .hero {
     background: linear-gradient(135deg, #3d0d12 0%, #6a1e28 55%, #862633 100%);
     border-radius: 14px; padding: 2.2rem 2.6rem; margin-bottom: 1.8rem; color: white;
@@ -324,14 +289,12 @@ html, body, [class*="css"] { font-family: 'Inter', sans-serif; }
 .hero h1 { font-family: 'Lora', serif; font-size: 2.1rem; font-weight: 600; color: white; margin: 0 0 0.5rem 0; }
 .hero .focus { font-size: 0.92rem; color: #f5d8db; margin-top: 0.4rem; }
 
-/* ── Section headings ── */
 .sec-title {
     font-family: 'Lora', serif; font-size: 1.45rem; font-weight: 600;
     color: #1a0508; border-left: 4px solid #862633;
     padding-left: 12px; margin: 1.6rem 0 1.2rem 0;
 }
 
-/* ── Timeline card (edu + exp) ── */
 .timeline-card {
     background: #fff; border: 1px solid #edd8da;
     border-left: 4px solid #862633;
@@ -350,7 +313,6 @@ html, body, [class*="css"] { font-family: 'Inter', sans-serif; }
 .timeline-card .detail { font-size: 0.88rem; color: #4a5568; line-height: 1.65; }
 .timeline-card .course-label { font-size: 0.78rem; font-weight: 700; color: #862633; text-transform: uppercase; letter-spacing: 0.05em; margin-top: 8px; margin-bottom: 3px; }
 
-/* ── Info cards (research / honours) ── */
 .info-card {
     background: #fff; border: 1px solid #edd8da; border-radius: 10px;
     padding: 1.2rem 1.5rem; margin-bottom: 1rem;
@@ -362,7 +324,6 @@ html, body, [class*="css"] { font-family: 'Inter', sans-serif; }
 }
 .info-card li { font-size: 0.9rem; color: #2d2d2d; line-height: 1.7; margin-bottom: 2px; }
 
-/* ── Cert chip ── */
 .cert-chip {
     display: inline-block; background: #fdf5f6;
     border: 1px solid #e8c5c8; border-radius: 6px;
@@ -370,10 +331,6 @@ html, body, [class*="css"] { font-family: 'Inter', sans-serif; }
     padding: 4px 12px; margin: 3px 4px 3px 0;
 }
 
-/* ── Divider ── */
-.rdivider { border: none; border-top: 1px solid #f0d8da; margin: 1.2rem 0; }
-
-/* Streamlit tab active color override */
 button[data-baseweb="tab"][aria-selected="true"] {
     color: #862633 !important;
     border-bottom: 2px solid #862633 !important;
@@ -382,12 +339,11 @@ button[data-baseweb="tab"][aria-selected="true"] {
 """, unsafe_allow_html=True)
 
 # ══════════════════════════════════════════════════════════════
-#  LANGUAGE TOGGLE
+#  LANGUAGE TOGGLE + SIDEBAR
 # ══════════════════════════════════════════════════════════════
 if "lang" not in st.session_state:
     st.session_state.lang = "zh"
 
-# ── Sidebar ──────────────────────────────────────────────────
 with st.sidebar:
     lang_choice = st.radio(
         "语言 / Language",
@@ -399,13 +355,8 @@ with st.sidebar:
 
     st.markdown("---")
 
-    # Photo — graceful fallback if file missing
-     st.image("012.psd", caption="何晨苗 (Meow)") 
-        st.markdown(
-            f"<div style='text-align:center;padding:1.2rem 0;font-size:3.5rem;'>🥊</div>"
-            f"<div style='text-align:center;font-size:0.9rem;color:#f0d0d3;'>{T['sidebar_name']}</div>",
-            unsafe_allow_html=True
-        )
+    # ── 照片：直接加载 012.psd 同目录文件 ──────────────────
+    st.image("012.psd", caption=T["sidebar_name"], use_container_width=True)
 
     st.markdown("---")
     st.subheader(f"📍 {T['contact_title']}")
@@ -416,7 +367,6 @@ with st.sidebar:
     st.caption("🇨🇳 +86 158-9747-2620")
     st.caption("🇺🇸 +1 (413) 272-5040")
 
-# ── Resolve T after sidebar (in case first render) ──────────
 T = TEXTS[st.session_state.lang]
 
 # ══════════════════════════════════════════════════════════════
@@ -472,7 +422,6 @@ with tab2:
 with tab3:
     st.markdown(f'<div class="sec-title">{T["res_title"]}</div>', unsafe_allow_html=True)
 
-    # Research focus
     st.markdown(f"""
     <div class="info-card">
         <div class="label">{T["res_focus_label"]}</div>
@@ -480,7 +429,6 @@ with tab3:
     </div>
     """, unsafe_allow_html=True)
 
-    # Conferences
     conf_items = "".join(f"<li>{c}</li>" for c in T["conferences"])
     st.markdown(f"""
     <div class="info-card">
@@ -489,7 +437,6 @@ with tab3:
     </div>
     """, unsafe_allow_html=True)
 
-    # Ongoing
     ongoing_items = "".join(f"<li>{o}</li>" for o in T["ongoing"])
     st.markdown(f"""
     <div class="info-card">
@@ -505,7 +452,6 @@ with tab4:
     col_left, col_right = st.columns([1, 1], gap="large")
 
     with col_left:
-        # Academic awards
         awards_items = "".join(f"<li>{a}</li>" for a in T["awards"])
         st.markdown(f"""
         <div class="info-card">
@@ -514,7 +460,6 @@ with tab4:
         </div>
         """, unsafe_allow_html=True)
 
-        # Athletic honours
         sports_items = "".join(f"<li>{s}</li>" for s in T["sports"])
         st.markdown(f"""
         <div class="info-card">
@@ -523,7 +468,6 @@ with tab4:
         </div>
         """, unsafe_allow_html=True)
 
-        # Language skills
         lang_items = "".join(f"<li>{l}</li>" for l in T["lang_skills"])
         st.markdown(f"""
         <div class="info-card">
@@ -533,7 +477,6 @@ with tab4:
         """, unsafe_allow_html=True)
 
     with col_right:
-        # Chinese certs
         cn_chips = "".join(f'<span class="cert-chip">✅ {c}</span>' for c in T["certs_sport"])
         st.markdown(f"""
         <div class="info-card">
@@ -542,7 +485,6 @@ with tab4:
         </div>
         """, unsafe_allow_html=True)
 
-        # International certs
         intl_chips = "".join(f'<span class="cert-chip">🌏 {c}</span>' for c in T["certs_intl"])
         st.markdown(f"""
         <div class="info-card">
@@ -551,7 +493,6 @@ with tab4:
         </div>
         """, unsafe_allow_html=True)
 
-        # Data science
         data_items = "".join(f"<li>{d}</li>" for d in T["data_skills"])
         st.markdown(f"""
         <div class="info-card">
