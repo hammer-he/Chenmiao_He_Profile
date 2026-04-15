@@ -263,68 +263,69 @@ st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap');
 html, body, [class*="css"] { font-family: 'Inter', sans-serif; }
-.main { background-color: #ffffff; }
+.main { background-color: #faf8f3; }
 
-/* ── Sidebar: white ── */
-[data-testid="stSidebar"] { background: #ffffff; border-right: 1px solid #e8e8e8; }
-[data-testid="stSidebar"] * { color: #1a1a1a !important; }
+/* ── Sidebar: deep forest green ── */
+[data-testid="stSidebar"] { background: #1a3028; }
+[data-testid="stSidebar"] * { color: #ddeee7 !important; }
 [data-testid="stSidebar"] .stRadio label { font-size: 0.9rem; padding: 4px 0; }
-[data-testid="stSidebar"] hr { border-color: #e0e0e0 !important; }
+[data-testid="stSidebar"] hr { border-color: #2d5040 !important; }
 
-/* ── Hero: white card with dark text ── */
+/* ── Hero: cream card with green left border ── */
 .hero {
-    background: #ffffff;
-    border: 1px solid #e8e8e8;
-    border-left: 5px solid #222222;
-    border-radius: 14px; padding: 2.2rem 2.6rem; margin-bottom: 1.8rem;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    background: #faf8f3;
+    border: 1px solid #c8ddd4;
+    border-left: 5px solid #1a3028;
+    border-radius: 0 14px 14px 0;
+    padding: 2.2rem 2.6rem; margin-bottom: 1.8rem;
+    box-shadow: 0 2px 10px rgba(26,48,40,0.07);
 }
-.hero h1 { font-family: 'Lora', serif; font-size: 2.1rem; font-weight: 600; color: #111111; margin: 0 0 0.5rem 0; }
-.hero .focus { font-size: 0.92rem; color: #444444; margin-top: 0.4rem; }
+.hero h1 { font-family: 'Lora', serif; font-size: 2.1rem; font-weight: 600; color: #1a3028; margin: 0 0 0.5rem 0; }
+.hero .focus { font-size: 0.92rem; color: #2d5040; margin-top: 0.4rem; }
 
 /* ── Section headings ── */
 .sec-title {
     font-family: 'Lora', serif; font-size: 1.45rem; font-weight: 600;
-    color: #111111; border-left: 4px solid #222222;
+    color: #1a3028; border-left: 4px solid #3d7a5a;
     padding-left: 12px; margin: 1.6rem 0 1.2rem 0;
 }
 
 /* ── Timeline cards ── */
 .timeline-card {
-    background: #ffffff; border: 1px solid #e4e4e4;
-    border-left: 4px solid #222222;
+    background: #faf8f3; border: 1px solid #c8ddd4;
+    border-left: 4px solid #1a3028;
     border-radius: 0 10px 10px 0;
     padding: 1.2rem 1.6rem; margin-bottom: 1.1rem;
-    box-shadow: 0 1px 6px rgba(0,0,0,0.05);
+    box-shadow: 0 1px 6px rgba(26,48,40,0.06);
 }
-.timeline-card .org { font-size: 1.08rem; font-weight: 700; color: #111111; margin: 0; }
-.timeline-card .sub { font-size: 0.82rem; color: #777777; margin: 1px 0 4px 0; }
+.timeline-card .org { font-size: 1.08rem; font-weight: 700; color: #1a3028; margin: 0; }
+.timeline-card .sub { font-size: 0.82rem; color: #4a7a62; margin: 1px 0 4px 0; }
 .timeline-card .period {
-    display: inline-block; background: #f5f5f5; color: #333333;
-    border: 1px solid #dddddd; border-radius: 20px;
+    display: inline-block; background: #e8f2ec; color: #2d5040;
+    border: 1px solid #b0d4c0; border-radius: 20px;
     font-size: 0.76rem; font-weight: 600; padding: 2px 10px; margin-bottom: 6px;
 }
-.timeline-card .role { font-size: 0.88rem; font-weight: 600; color: #222222; margin-bottom: 6px; }
-.timeline-card .detail { font-size: 0.88rem; color: #4a5568; line-height: 1.65; }
-.timeline-card .course-label { font-size: 0.78rem; font-weight: 700; color: #333333; text-transform: uppercase; letter-spacing: 0.05em; margin-top: 8px; margin-bottom: 3px; }
+.timeline-card .role { font-size: 0.88rem; font-weight: 600; color: #2d5040; margin-bottom: 6px; }
+.timeline-card .detail { font-size: 0.88rem; color: #3a4a40; line-height: 1.65; }
+.timeline-card .course-label { font-size: 0.78rem; font-weight: 700; color: #3d7a5a; text-transform: uppercase; letter-spacing: 0.05em; margin-top: 8px; margin-bottom: 3px; }
 
 /* ── Info cards ── */
 .info-card {
-    background: #ffffff; border: 1px solid #e4e4e4; border-radius: 10px;
+    background: #faf8f3; border: 1px solid #c8ddd4; border-radius: 10px;
     padding: 1.2rem 1.5rem; margin-bottom: 1rem;
-    box-shadow: 0 1px 6px rgba(0,0,0,0.04);
+    box-shadow: 0 1px 6px rgba(26,48,40,0.05);
 }
 .info-card .label {
-    font-size: 0.75rem; font-weight: 700; color: #333333;
+    font-size: 0.75rem; font-weight: 700; color: #2d5040;
     text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px;
 }
-.info-card li { font-size: 0.9rem; color: #2d2d2d; line-height: 1.7; margin-bottom: 2px; }
+.info-card li { font-size: 0.9rem; color: #1a3028; line-height: 1.7; margin-bottom: 2px; }
 
 /* ── Cert chips ── */
 .cert-chip {
-    display: inline-block; background: #f7f7f7;
-    border: 1px solid #dddddd; border-radius: 6px;
-    font-size: 0.82rem; color: #333333;
+    display: inline-block; background: #e8f2ec;
+    border: 1px solid #b0d4c0; border-radius: 6px;
+    font-size: 0.82rem; color: #2d5040;
     padding: 4px 12px; margin: 3px 4px 3px 0;
 }
 </style>
