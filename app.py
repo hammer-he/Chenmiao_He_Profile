@@ -128,12 +128,6 @@ TEXTS = {
             "美国心脏协会心肺复苏与体外除颤急救证书 (AHA CPR/AED)",
             "数据分析师资格证",
         ],
-        "data_label":       "数据科学",
-        "data_skills": [
-            "🐍 Python — 数据处理 / 网页开发",
-            "📊 R 语言 — 统计分析 / Meta分析",
-            "📈 Streamlit — 数据可视化仪表盘",
-        ],
         "certs_cn_title":   "国内证书",
         "certs_intl_title": "国际证书",
     },
@@ -257,83 +251,81 @@ TEXTS = {
             "AHA CPR & AED Certificate",
             "Data Analyst Qualification Certificate",
         ],
-        "data_label":       "Data Science",
-        "data_skills": [
-            "🐍 Python — Data processing / Web development",
-            "📊 R — Statistical analysis / Meta-analysis",
-            "📈 Streamlit — Data visualisation dashboards",
-        ],
         "certs_cn_title":   "Chinese Certificates",
         "certs_intl_title": "International Certificates",
     },
 }
 
 # ══════════════════════════════════════════════════════════════
-#  GLOBAL CSS  —  PMS 202 · #862633
+#  GLOBAL CSS  —  White Theme
 # ══════════════════════════════════════════════════════════════
 st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap');
 html, body, [class*="css"] { font-family: 'Inter', sans-serif; }
-.main { background-color: #fdf8f8; }
+.main { background-color: #ffffff; }
 
-[data-testid="stSidebar"] { background: #1c0508; }
-[data-testid="stSidebar"] * { color: #f5e8ea !important; }
+/* ── Sidebar: white ── */
+[data-testid="stSidebar"] { background: #ffffff; border-right: 1px solid #e8e8e8; }
+[data-testid="stSidebar"] * { color: #1a1a1a !important; }
 [data-testid="stSidebar"] .stRadio label { font-size: 0.9rem; padding: 4px 0; }
-[data-testid="stSidebar"] hr { border-color: #4a1520 !important; }
+[data-testid="stSidebar"] hr { border-color: #e0e0e0 !important; }
 
+/* ── Hero: white card with dark text ── */
 .hero {
-    background: linear-gradient(135deg, #3d0d12 0%, #6a1e28 55%, #862633 100%);
-    border-radius: 14px; padding: 2.2rem 2.6rem; margin-bottom: 1.8rem; color: white;
+    background: #ffffff;
+    border: 1px solid #e8e8e8;
+    border-left: 5px solid #222222;
+    border-radius: 14px; padding: 2.2rem 2.6rem; margin-bottom: 1.8rem;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
 }
-.hero h1 { font-family: 'Lora', serif; font-size: 2.1rem; font-weight: 600; color: white; margin: 0 0 0.5rem 0; }
-.hero .focus { font-size: 0.92rem; color: #f5d8db; margin-top: 0.4rem; }
+.hero h1 { font-family: 'Lora', serif; font-size: 2.1rem; font-weight: 600; color: #111111; margin: 0 0 0.5rem 0; }
+.hero .focus { font-size: 0.92rem; color: #444444; margin-top: 0.4rem; }
 
+/* ── Section headings ── */
 .sec-title {
     font-family: 'Lora', serif; font-size: 1.45rem; font-weight: 600;
-    color: #1a0508; border-left: 4px solid #862633;
+    color: #111111; border-left: 4px solid #222222;
     padding-left: 12px; margin: 1.6rem 0 1.2rem 0;
 }
 
+/* ── Timeline cards ── */
 .timeline-card {
-    background: #fff; border: 1px solid #edd8da;
-    border-left: 4px solid #862633;
+    background: #ffffff; border: 1px solid #e4e4e4;
+    border-left: 4px solid #222222;
     border-radius: 0 10px 10px 0;
     padding: 1.2rem 1.6rem; margin-bottom: 1.1rem;
-    box-shadow: 0 2px 8px rgba(134,38,51,0.06);
+    box-shadow: 0 1px 6px rgba(0,0,0,0.05);
 }
-.timeline-card .org { font-size: 1.08rem; font-weight: 700; color: #1a0508; margin: 0; }
-.timeline-card .sub { font-size: 0.82rem; color: #8a6670; margin: 1px 0 4px 0; }
+.timeline-card .org { font-size: 1.08rem; font-weight: 700; color: #111111; margin: 0; }
+.timeline-card .sub { font-size: 0.82rem; color: #777777; margin: 1px 0 4px 0; }
 .timeline-card .period {
-    display: inline-block; background: #fdf0f1; color: #862633;
-    border: 1px solid #f0c8cb; border-radius: 20px;
+    display: inline-block; background: #f5f5f5; color: #333333;
+    border: 1px solid #dddddd; border-radius: 20px;
     font-size: 0.76rem; font-weight: 600; padding: 2px 10px; margin-bottom: 6px;
 }
-.timeline-card .role { font-size: 0.88rem; font-weight: 600; color: #4a1520; margin-bottom: 6px; }
+.timeline-card .role { font-size: 0.88rem; font-weight: 600; color: #222222; margin-bottom: 6px; }
 .timeline-card .detail { font-size: 0.88rem; color: #4a5568; line-height: 1.65; }
-.timeline-card .course-label { font-size: 0.78rem; font-weight: 700; color: #862633; text-transform: uppercase; letter-spacing: 0.05em; margin-top: 8px; margin-bottom: 3px; }
+.timeline-card .course-label { font-size: 0.78rem; font-weight: 700; color: #333333; text-transform: uppercase; letter-spacing: 0.05em; margin-top: 8px; margin-bottom: 3px; }
 
+/* ── Info cards ── */
 .info-card {
-    background: #fff; border: 1px solid #edd8da; border-radius: 10px;
+    background: #ffffff; border: 1px solid #e4e4e4; border-radius: 10px;
     padding: 1.2rem 1.5rem; margin-bottom: 1rem;
-    box-shadow: 0 2px 6px rgba(134,38,51,0.05);
+    box-shadow: 0 1px 6px rgba(0,0,0,0.04);
 }
 .info-card .label {
-    font-size: 0.75rem; font-weight: 700; color: #862633;
+    font-size: 0.75rem; font-weight: 700; color: #333333;
     text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px;
 }
 .info-card li { font-size: 0.9rem; color: #2d2d2d; line-height: 1.7; margin-bottom: 2px; }
 
+/* ── Cert chips ── */
 .cert-chip {
-    display: inline-block; background: #fdf5f6;
-    border: 1px solid #e8c5c8; border-radius: 6px;
-    font-size: 0.82rem; color: #6a1e27;
+    display: inline-block; background: #f7f7f7;
+    border: 1px solid #dddddd; border-radius: 6px;
+    font-size: 0.82rem; color: #333333;
     padding: 4px 12px; margin: 3px 4px 3px 0;
-}
-
-button[data-baseweb="tab"][aria-selected="true"] {
-    color: #862633 !important;
-    border-bottom: 2px solid #862633 !important;
 }
 </style>
 """, unsafe_allow_html=True)
@@ -490,13 +482,5 @@ with tab4:
         <div class="info-card">
             <div class="label">🌍 {T["certs_intl_title"]}</div>
             <div style="margin-top:4px;">{intl_chips}</div>
-        </div>
-        """, unsafe_allow_html=True)
-
-        data_items = "".join(f"<li>{d}</li>" for d in T["data_skills"])
-        st.markdown(f"""
-        <div class="info-card">
-            <div class="label">💻 {T["data_label"]}</div>
-            <ul>{data_items}</ul>
         </div>
         """, unsafe_allow_html=True)
