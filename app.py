@@ -1,487 +1,664 @@
 import streamlit as st
-import os
+import qrcode
+from io import BytesIO
+from PIL import Image
 
 st.set_page_config(
     page_title="何晨苗 | He Chenmiao",
     page_icon="🥊",
-    layout="wide",
-    initial_sidebar_state="expanded"
+    layout="centered",
+    initial_sidebar_state="collapsed"
 )
 
+# ══════════════════════════════════════════════════════════════
+#  BILINGUAL CONTENT — 中文版全中文 / English version all English
+# ══════════════════════════════════════════════════════════════
 TEXTS = {
     "zh": {
-        "lang_options": ["中文", "English"],
-        "lang_label":   "语言 / Language",
-        "sidebar_name": "何晨苗 (Meow)",
-        "contact_title": "联系方式",
-        "email_label":  "📧 邮箱",
-        "phone_label":  "📱 电话",
-        "hero_title":   "您好，我是何晨苗 (Meow) 👋",
-        "hero_focus":   "**研究方向：** `拳击` `运动表现分析` `循证运动实践` `体育教育`",
-        "tab_edu":      "🎓 教育背景",
-        "tab_exp":      "💼 实践经验",
-        "tab_res":      "🔬 科研成果",
-        "tab_hon":      "🏅 荣誉与技能",
-        "edu_title":    "教育背景",
+        "name":        "何晨苗",
+        "tagline":     "体育教育训练学硕士在读 · 运动表现分析 · 拳击",
+        "institution": "北京体育大学 / 春田学院访问学者",
+        "location":    "北京，中国 · 马萨诸塞州春田市，美国",
+        "qr_label":    "扫码访问",
+        "lang_zh":     "中文",
+        "lang_en":     "English",
+
+        "sec_about":   "简介",
+        "about": (
+            "专注于运动表现量化分析与循证研究。"
+            "研究方向横跨拳击技术动作自动化评估、运动干预与行为健康、体育教育政策。"
+            "国家二级拳击运动员，拥有国内外多项专业执照，"
+            "致力于将严谨的科研方法与竞技体育实践深度融合。"
+        ),
+
+        "sec_edu": "教育背景",
         "edu": [
             {
-                "school":   "北京体育大学",
-                "sub":      "Beijing Sport University",
-                "period":   "2023.9 — 2026.6",
-                "degree":   "体育教育训练学 · 硕士研究生",
-                "courses_label": "核心课程",
-                "courses":  "运动生理学原理 · 运动训练学原理 · 体育教学论 · 体育科研方法",
+                "org":    "北京体育大学",
+                "badge":  "硕士研究生",
+                "gold":   False,
+                "period": "2023 — 2026",
+                "role":   "体育教育训练学",
+                "desc":   "运动生理学原理 · 运动训练学原理 · 体育教学论 · 体育科研方法",
             },
             {
-                "school":   "春田学院",
-                "sub":      "Springfield College · Springfield, MA",
-                "period":   "2025.8 — 2026.5",
-                "degree":   "体育教育训练学 · 访问学者",
-                "courses_label": "核心课程",
-                "courses":  "运动科学的数据分析 · 高级统计学 · 循证实践 · 运动技能的发展与评估",
+                "org":    "春田学院",
+                "badge":  "访问学者",
+                "gold":   True,
+                "period": "2025 — 2026",
+                "role":   "体育教育训练学",
+                "desc":   "运动科学数据分析 · 高级统计学 · 循证实践 · 运动技能发展与评估",
             },
             {
-                "school":   "湖南师范大学树达学院",
-                "sub":      "Hunan Normal University Shuda College",
-                "period":   "2019.9 — 2023.6",
-                "degree":   "社会体育指导与管理 · 学士学位",
-                "courses_label": "核心课程",
-                "courses":  "体育管理学 · 篮球 · 足球 · 羽毛球 · 体育舞蹈 · 空手道",
+                "org":    "湖南师范大学树达学院",
+                "badge":  "学士学位",
+                "gold":   False,
+                "period": "2019 — 2023",
+                "role":   "社会体育指导与管理",
+                "desc":   "体育管理学 · 篮球 · 足球 · 羽毛球 · 体育舞蹈 · 空手道",
             },
         ],
-        "exp_title":    "实践经验",
+
+        "sec_exp": "实践经验",
         "exp": [
             {
-                "org":      "中国拳击协会",
-                "sub":      "China Boxing Association",
-                "period":   "2025.5 — 2025.8",
-                "role":     "实习生",
-                "duties": [
-                    "负责全国拳击比赛及教练员培训的组织与管理",
-                    "负责国家队外事接待工作",
-                ],
+                "org":    "中国拳击协会",
+                "badge":  "实习生",
+                "gold":   False,
+                "period": "2025.5 — 2025.8",
+                "role":   "",
+                "desc":   "负责全国拳击比赛及教练员培训的组织与管理，负责国家队外事接待工作",
             },
             {
-                "org":      "春田市拳击队",
-                "sub":      "Springfield Boxing Team · Springfield, MA",
-                "period":   "2025.9 — 2026.5",
-                "role":     "助理教练",
-                "duties": [
-                    "负责队员体能监测与数据分析",
-                    "参与正式比赛裁判工作",
-                ],
+                "org":    "春田市拳击队",
+                "badge":  "助理教练",
+                "gold":   True,
+                "period": "2025.9 — 2026.5",
+                "role":   "",
+                "desc":   "负责队员体能监测与数据分析，参与正式比赛裁判工作",
             },
             {
-                "org":      "北京体育大学附属竞技体育学院拳击队",
-                "sub":      "BSU Affiliated School of Competitive Sports · Boxing Team",
-                "period":   "2023.9 — 2025.5",
-                "role":     "助理教练",
-                "duties": [
-                    "负责拳击队训练的组织与管理",
-                    "参与技术分析与体育课程设计",
-                ],
+                "org":    "北京体育大学附属竞技体育学院拳击队",
+                "badge":  "助理教练",
+                "gold":   False,
+                "period": "2023.9 — 2025.5",
+                "role":   "",
+                "desc":   "负责拳击队训练的组织与管理，参与技术分析与体育课程设计",
             },
         ],
-        "res_title":        "科研成果",
-        "res_focus_label":  "研究方向",
-        "res_focus_body":   "拳击技术动作自动化评估 · 新入职体育教师专业发展支持",
-        "conf_label":       "国际会议报告",
-        "conferences": [
-            "**SHAPE America National Convention**",
-            "**ICSPAH 年会** — 主题：拳击技术动作发展序列构建",
-            "**哈佛国际教育论坛** — 主题：新入职女性体育教师的职业困境",
+
+        "sec_research": "科研成果",
+        "research_focus_label": "研究方向",
+        "research_focus": "拳击技术动作自动化评估 · 新入职体育教师专业发展支持",
+        "research_conf_label": "国际会议报告",
+        "research_conf": [
+            "SHAPE America National Convention",
+            "ICSPAH 年会 — 拳击技术动作发展序列构建",
+            "哈佛国际教育论坛 — 新入职女性体育教师的职业困境",
         ],
-        "ongoing_label":    "进行中的研究项目",
-        "ongoing": [
-            "**Meta分析**：运动锻炼对电子产品成瘾的干预效果（团队协作，进行中）",
-            "**系统综述**：题目待定（独立项目，方案设计阶段）",
+        "research_ongoing_label": "进行中项目",
+        "research_ongoing": [
+            "Meta 分析：运动锻炼对电子产品成瘾的干预效果（团队合作）",
+            "系统综述：题目待定（独立项目，方案设计阶段）",
         ],
-        "hon_title":        "荣誉与技能",
-        "awards_label":     "学术奖项",
-        "awards": [
-            "John's Scholarship · 春田学院",
-            "二等奖学金 · 北京体育大学",
-        ],
-        "sports_label":     "竞技体育荣誉",
-        "sports": [
+
+        "sec_honours": "荣誉奖项",
+        "honours": [
             "冠军 · 全国大学生拳击锦标赛",
             "冠军 · 北体大拳击比赛",
             "冠军 · 永州市篮球比赛",
+            "John's Scholarship · 春田学院",
+            "二等奖学金 · 北京体育大学",
         ],
-        "lang_skill_label": "语言能力",
-        "lang_skills": [
-            "中文 — 母语",
-            "英语 — TOEFL iBT 93",
-        ],
-        "certs_sport": [
+
+        "sec_certs": "资质证书",
+        "certs_dark": [
             "国家二级拳击运动员证",
             "国家二级拳击裁判员证",
             "国家二级羽毛球裁判证",
             "国家三级武术套路裁判员证",
             "国家跳绳社会指导员证",
             "体育教师资格证",
-        ],
-        "certs_intl": [
             "美国马萨诸塞州体育教师执照",
             "美国拳击协会拳击官员执照",
-            "美国体能协会军事体能资格证 (NSCA-TSAC-F)",
-            "美国心脏协会心肺复苏与体外除颤急救证书 (AHA CPR/AED)",
+            "NSCA-TSAC-F",
+            "AHA CPR/AED",
             "数据分析师资格证",
         ],
-        "certs_cn_title":   "国内证书",
-        "certs_intl_title": "国际证书",
+        "certs_light": [
+            "托福 iBT 93",
+            "中文 — 母语",
+        ],
+
+        "contact_email_label": "邮箱",
+        "contact_phone_label": "电话",
     },
 
     "en": {
-        "lang_options": ["中文", "English"],
-        "lang_label":   "语言 / Language",
-        "sidebar_name": "He Chenmiao (Meow)",
-        "contact_title": "Contact",
-        "email_label":  "📧 Email",
-        "phone_label":  "📱 Phone",
-        "hero_title":   "Hi, I'm He Chenmiao (Meow) 👋",
-        "hero_focus":   "**Research Focus:** `Boxing` `Sports Performance Analysis` `Evidence-Based Practice` `Physical Education`",
-        "tab_edu":      "🎓 Education",
-        "tab_exp":      "💼 Experience",
-        "tab_res":      "🔬 Research",
-        "tab_hon":      "🏅 Honours & Skills",
-        "edu_title":    "Education",
+        "name":        "He Chenmiao (Meow)",
+        "tagline":     "Sport Science Researcher · Sports Performance Analysis · Boxing",
+        "institution": "Beijing Sport University / Springfield College Visiting Scholar",
+        "location":    "Beijing, China · Springfield, MA, USA",
+        "qr_label":    "Scan to visit",
+        "lang_zh":     "中文",
+        "lang_en":     "English",
+
+        "sec_about": "About",
+        "about": (
+            "Sport science researcher focused on quantitative performance analysis "
+            "and evidence-based practice. Research spans automated assessment of boxing "
+            "technique, exercise-behavioral health intervention, and physical education policy. "
+            "National Level-2 Boxing Athlete holding multiple domestic and international "
+            "professional licenses, committed to integrating rigorous research methods "
+            "with competitive sport practice."
+        ),
+
+        "sec_edu": "Education",
         "edu": [
             {
-                "school":   "Beijing Sport University",
-                "sub":      "北京体育大学",
-                "period":   "Sep 2023 — Jun 2026",
-                "degree":   "Sport Education & Training · Master's Degree",
-                "courses_label": "Core Courses",
-                "courses":  "Exercise Physiology · Sport Training Theory · PE Pedagogy · Research Methods in Sport Science",
+                "org":    "Beijing Sport University",
+                "badge":  "Master's",
+                "gold":   False,
+                "period": "2023 — 2026",
+                "role":   "Sport Education & Training",
+                "desc":   "Exercise Physiology · Sport Training Theory · PE Pedagogy · Research Methods in Sport Science",
             },
             {
-                "school":   "Springfield College",
-                "sub":      "春田学院 · Springfield, MA",
-                "period":   "Aug 2025 — May 2026",
-                "degree":   "Sport Education & Training · Visiting Scholar",
-                "courses_label": "Core Courses",
-                "courses":  "Data Analytics in Sport Science · Advanced Statistics · Evidence-Based Practice · Motor Skill Development & Assessment",
+                "org":    "Springfield College",
+                "badge":  "Visiting Scholar",
+                "gold":   True,
+                "period": "2025 — 2026",
+                "role":   "Sport Education & Training",
+                "desc":   "Data Analytics in Sport Science · Advanced Statistics · Evidence-Based Practice · Motor Skill Development & Assessment",
             },
             {
-                "school":   "Hunan Normal University Shuda College",
-                "sub":      "湖南师范大学树达学院",
-                "period":   "Sep 2019 — Jun 2023",
-                "degree":   "Social Sport Instruction & Management · Bachelor's Degree",
-                "courses_label": "Core Courses",
-                "courses":  "Sport Management · Basketball · Football · Badminton · Sport Dance · Karate",
+                "org":    "Hunan Normal University Shuda College",
+                "badge":  "Bachelor's",
+                "gold":   False,
+                "period": "2019 — 2023",
+                "role":   "Social Sport Instruction & Management",
+                "desc":   "Sport Management · Basketball · Football · Badminton · Sport Dance · Karate",
             },
         ],
-        "exp_title":    "Professional Experience",
+
+        "sec_exp": "Experience",
         "exp": [
             {
-                "org":      "China Boxing Association",
-                "sub":      "中国拳击协会",
-                "period":   "May 2025 — Aug 2025",
-                "role":     "Intern",
-                "duties": [
-                    "Organised and managed national boxing competitions and coaching certification programmes",
-                    "Coordinated international affairs and delegation reception for the national team",
-                ],
+                "org":    "China Boxing Association",
+                "badge":  "Intern",
+                "gold":   False,
+                "period": "May 2025 — Aug 2025",
+                "role":   "",
+                "desc":   "Organised national boxing competitions and coaching certification programmes; coordinated international affairs and delegation reception for the national team",
             },
             {
-                "org":      "Springfield Boxing Team",
-                "sub":      "春田市拳击队 · Springfield, MA",
-                "period":   "Sep 2025 — May 2026",
-                "role":     "Assistant Coach",
-                "duties": [
-                    "Conducted athlete fitness monitoring and performance data analysis",
-                    "Served as a certified official in formal competitive bouts",
-                ],
+                "org":    "Springfield Boxing Team",
+                "badge":  "Assistant Coach",
+                "gold":   True,
+                "period": "Sep 2025 — May 2026",
+                "role":   "",
+                "desc":   "Conducted athlete fitness monitoring and performance data analysis; served as a certified official in formal competitive bouts",
             },
             {
-                "org":      "BSU Affiliated School of Competitive Sports · Boxing Team",
-                "sub":      "北京体育大学附属竞技体育学院拳击队",
-                "period":   "Sep 2023 — May 2025",
-                "role":     "Assistant Coach",
-                "duties": [
-                    "Managed the daily organisation and training of the boxing squad",
-                    "Contributed to technical analysis and sport curriculum design",
-                ],
+                "org":    "BSU Affiliated School of Competitive Sports · Boxing Team",
+                "badge":  "Assistant Coach",
+                "gold":   False,
+                "period": "Sep 2023 — May 2025",
+                "role":   "",
+                "desc":   "Managed daily organisation and training of the boxing squad; contributed to technical analysis and sport curriculum design",
             },
         ],
-        "res_title":        "Research",
-        "res_focus_label":  "Research Focus",
-        "res_focus_body":   "Automated assessment of boxing technical movements · Professional support for newly employed PE teachers",
-        "conf_label":       "Conference Presentations",
-        "conferences": [
-            "**SHAPE America National Convention**",
-            "**ICSPAH Annual Conference** — Boxing Technical Movement Development Sequence",
-            "**Harvard International Education Forum** — Dilemmas of Newly Employed Female PE Teachers",
+
+        "sec_research": "Research",
+        "research_focus_label": "Research Focus",
+        "research_focus": "Automated assessment of boxing technical movements · Professional support for newly employed PE teachers",
+        "research_conf_label": "Conference Presentations",
+        "research_conf": [
+            "SHAPE America National Convention",
+            "ICSPAH Annual Conference — Boxing Technical Movement Development Sequence",
+            "Harvard International Education Forum — Dilemmas of Newly Employed Female PE Teachers",
         ],
-        "ongoing_label":    "Ongoing Projects",
-        "ongoing": [
-            "**Meta-Analysis**: Effect of exercise interventions on electronic device addiction (team project, in progress)",
-            "**Systematic Review**: Title in development (independent, protocol stage)",
+        "research_ongoing_label": "Ongoing Projects",
+        "research_ongoing": [
+            "Meta-Analysis: Effect of exercise on electronic device addiction (team project, in progress)",
+            "Systematic Review: Title in development (independent, protocol stage)",
         ],
-        "hon_title":        "Honours & Skills",
-        "awards_label":     "Academic Awards",
-        "awards": [
-            "John's Scholarship · Springfield College",
-            "Second-Class Scholarship · Beijing Sport University",
-        ],
-        "sports_label":     "Athletic Honours",
-        "sports": [
+
+        "sec_honours": "Honours & Awards",
+        "honours": [
             "Champion · National Collegiate Boxing Championship",
             "Champion · BSU Boxing Competition",
             "Champion · Yongzhou City Basketball Competition",
+            "John's Scholarship · Springfield College",
+            "Second-Class Scholarship · Beijing Sport University",
         ],
-        "lang_skill_label": "Language Proficiency",
-        "lang_skills": [
-            "Chinese — Native",
-            "English — TOEFL iBT 93",
-        ],
-        "certs_sport": [
-            "National Level-2 Boxing Athlete Certificate",
-            "National Level-2 Boxing Referee Certificate",
-            "National Level-2 Badminton Referee Certificate",
-            "National Level-3 Wushu Routines Referee Certificate",
-            "National Jump Rope Community Instructor Certificate",
-            "Physical Education Teacher Qualification Certificate",
-        ],
-        "certs_intl": [
-            "Massachusetts (USA) Physical Education Teacher License",
+
+        "sec_certs": "Certifications",
+        "certs_dark": [
+            "National L2 Boxing Athlete Certificate",
+            "National L2 Boxing Referee Certificate",
+            "National L2 Badminton Referee Certificate",
+            "National L3 Wushu Routines Referee Certificate",
+            "National Jump Rope Instructor Certificate",
+            "PE Teacher Qualification Certificate",
+            "Massachusetts PE Teacher License",
             "USA Boxing Officials License",
-            "NSCA Tactical Strength & Conditioning Facilitator (TSAC-F)",
-            "AHA CPR & AED Certificate",
+            "NSCA TSAC-F",
+            "AHA CPR / AED",
             "Data Analyst Qualification Certificate",
         ],
-        "certs_cn_title":   "Chinese Certificates",
-        "certs_intl_title": "International Certificates",
+        "certs_light": [
+            "TOEFL iBT 93",
+            "English — Professional",
+            "Chinese — Native",
+        ],
+
+        "contact_email_label": "Email",
+        "contact_phone_label": "Phone",
     },
 }
 
 # ══════════════════════════════════════════════════════════════
-#  GLOBAL CSS  —  White Theme
+#  CSS — Jarocki style: pure white + dark gray + IBM Plex Mono
 # ══════════════════════════════════════════════════════════════
 st.markdown("""
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap');
-html, body, [class*="css"] { font-family: 'Inter', sans-serif; }
-.main { background-color: #faf8f3; }
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;600;700&display=swap');
 
-/* ── Sidebar: deep forest green ── */
-[data-testid="stSidebar"] { background: #1a3028; }
-[data-testid="stSidebar"] * { color: #ddeee7 !important; }
-[data-testid="stSidebar"] .stRadio label { font-size: 0.9rem; padding: 4px 0; }
-[data-testid="stSidebar"] hr { border-color: #2d5040 !important; }
-
-/* ── Hero: cream card with green left border ── */
-.hero {
-    background: #faf8f3;
-    border: 1px solid #c8ddd4;
-    border-left: 5px solid #1a3028;
-    border-radius: 0 14px 14px 0;
-    padding: 2.2rem 2.6rem; margin-bottom: 1.8rem;
-    box-shadow: 0 2px 10px rgba(26,48,40,0.07);
+html, body, [class*="css"] {
+    font-family: 'Inter', sans-serif;
+    background-color: #ffffff;
 }
-.hero h1 { font-family: 'Lora', serif; font-size: 2.1rem; font-weight: 600; color: #1a3028; margin: 0 0 0.5rem 0; }
-.hero .focus { font-size: 0.92rem; color: #2d5040; margin-top: 0.4rem; }
+.main { background-color: #ffffff; }
+.main .block-container {
+    max-width: 760px;
+    padding: 2.5rem 2rem 3rem;
+    background: #ffffff;
+}
 
-/* ── Section headings ── */
+/* hide default streamlit chrome */
+[data-testid="stSidebar"] { display: none; }
+header[data-testid="stHeader"] { background: transparent; }
+footer { display: none; }
+
+/* ── Header ── */
+.cv-name {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #111111;
+    letter-spacing: -0.02em;
+    margin: 0 0 0.35rem;
+    line-height: 1.1;
+}
+.cv-tagline {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.82rem;
+    color: #444444;
+    line-height: 1.6;
+    margin: 0 0 0.35rem;
+}
+.cv-location {
+    font-size: 0.78rem;
+    color: #888888;
+    margin-bottom: 0.8rem;
+}
+.cv-icon-row {
+    display: flex;
+    gap: 7px;
+    flex-wrap: wrap;
+    margin-bottom: 0;
+}
+.cv-icon-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    border: 1px solid #dddddd;
+    border-radius: 4px;
+    padding: 3px 10px;
+    font-size: 0.75rem;
+    color: #444444;
+    font-family: 'IBM Plex Mono', monospace;
+    text-decoration: none;
+    background: #ffffff;
+}
+
+/* ── Lang toggle ── */
+.lang-row {
+    display: flex;
+    gap: 6px;
+    margin: 1.4rem 0 1.8rem;
+}
+.lang-btn {
+    font-size: 0.78rem;
+    font-family: 'IBM Plex Mono', monospace;
+    padding: 4px 14px;
+    border: 1px solid #dddddd;
+    border-radius: 3px;
+    color: #888888;
+    background: #ffffff;
+    cursor: pointer;
+}
+.lang-btn.active {
+    background: #111111;
+    color: #ffffff;
+    border-color: #111111;
+}
+
+/* ── Section ── */
 .sec-title {
-    font-family: 'Lora', serif; font-size: 1.45rem; font-weight: 600;
-    color: #1a3028; border-left: 4px solid #3d7a5a;
-    padding-left: 12px; margin: 1.6rem 0 1.2rem 0;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #111111;
+    letter-spacing: -0.01em;
+    margin: 0 0 0.75rem;
+    padding-bottom: 0.45rem;
+    border-bottom: 1px solid #f0f0f0;
 }
 
-/* ── Timeline cards ── */
-.timeline-card {
-    background: #faf8f3; border: 1px solid #c8ddd4;
-    border-left: 4px solid #1a3028;
-    border-radius: 0 10px 10px 0;
-    padding: 1.2rem 1.6rem; margin-bottom: 1.1rem;
-    box-shadow: 0 1px 6px rgba(26,48,40,0.06);
+/* ── About ── */
+.about-body {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.82rem;
+    color: #444444;
+    line-height: 1.75;
 }
-.timeline-card .org { font-size: 1.08rem; font-weight: 700; color: #1a3028; margin: 0; }
-.timeline-card .sub { font-size: 0.82rem; color: #4a7a62; margin: 1px 0 4px 0; }
-.timeline-card .period {
-    display: inline-block; background: #e8f2ec; color: #2d5040;
-    border: 1px solid #b0d4c0; border-radius: 20px;
-    font-size: 0.76rem; font-weight: 600; padding: 2px 10px; margin-bottom: 6px;
-}
-.timeline-card .role { font-size: 0.88rem; font-weight: 600; color: #2d5040; margin-bottom: 6px; }
-.timeline-card .detail { font-size: 0.88rem; color: #3a4a40; line-height: 1.65; }
-.timeline-card .course-label { font-size: 0.78rem; font-weight: 700; color: #3d7a5a; text-transform: uppercase; letter-spacing: 0.05em; margin-top: 8px; margin-bottom: 3px; }
 
-/* ── Info cards ── */
-.info-card {
-    background: #faf8f3; border: 1px solid #c8ddd4; border-radius: 10px;
-    padding: 1.2rem 1.5rem; margin-bottom: 1rem;
-    box-shadow: 0 1px 6px rgba(26,48,40,0.05);
+/* ── Entry (edu / exp) ── */
+.entry-wrap {
+    margin-bottom: 1.1rem;
 }
-.info-card .label {
-    font-size: 0.75rem; font-weight: 700; color: #2d5040;
-    text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px;
+.entry-top-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px;
+    margin-bottom: 0.15rem;
 }
-.info-card li { font-size: 0.9rem; color: #1a3028; line-height: 1.7; margin-bottom: 2px; }
+.entry-org {
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: #111111;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+.entry-badge {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 400;
+    color: #555555;
+    background: #f0f0f0;
+    border: 1px solid #e0e0e0;
+    border-radius: 3px;
+    padding: 1px 8px;
+}
+.entry-badge.gold {
+    background: #fef9ee;
+    border-color: #e8d090;
+    color: #7a5808;
+}
+.entry-period {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    color: #888888;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+.entry-role {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.8rem;
+    color: #333333;
+    margin-bottom: 0.2rem;
+}
+.entry-desc {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.77rem;
+    color: #666666;
+    line-height: 1.65;
+}
+
+/* ── Research ── */
+.research-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: #888888;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin: 0.8rem 0 0.3rem;
+}
+.research-focus {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.82rem;
+    color: #333333;
+    line-height: 1.6;
+}
+.research-item {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    color: #555555;
+    line-height: 1.7;
+    padding-left: 1rem;
+    position: relative;
+}
+.research-item::before {
+    content: "—";
+    position: absolute;
+    left: 0;
+    color: #aaaaaa;
+}
+
+/* ── Honours ── */
+.honour-item {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.8rem;
+    color: #444444;
+    line-height: 1.7;
+    padding-left: 1rem;
+    position: relative;
+}
+.honour-item::before {
+    content: "—";
+    position: absolute;
+    left: 0;
+    color: #aaaaaa;
+}
 
 /* ── Cert chips ── */
-.cert-chip {
-    display: inline-block; background: #e8f2ec;
-    border: 1px solid #b0d4c0; border-radius: 6px;
-    font-size: 0.82rem; color: #2d5040;
-    padding: 4px 12px; margin: 3px 4px 3px 0;
+.chips-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+.chip-dark {
+    background: #111111;
+    color: #ffffff;
+    border-radius: 4px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    padding: 4px 11px;
+}
+.chip-light {
+    background: #f5f5f5;
+    color: #333333;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    padding: 4px 11px;
+}
+
+/* ── Divider ── */
+.cv-divider {
+    border: none;
+    border-top: 1px solid #f0f0f0;
+    margin: 1.6rem 0;
 }
 </style>
 """, unsafe_allow_html=True)
 
 # ══════════════════════════════════════════════════════════════
-#  LANGUAGE TOGGLE + SIDEBAR
+#  LANGUAGE STATE
 # ══════════════════════════════════════════════════════════════
 if "lang" not in st.session_state:
     st.session_state.lang = "zh"
 
-with st.sidebar:
-    lang_choice = st.radio(
-        "语言 / Language",
-        ["中文", "English"],
-        index=0 if st.session_state.lang == "zh" else 1
+# ══════════════════════════════════════════════════════════════
+#  QR CODE GENERATOR
+# ══════════════════════════════════════════════════════════════
+YOUR_URL = "https://chenmiaoheprofile-keephungry.streamlit.app"  
+
+@st.cache_data
+def make_qr(url: str) -> Image.Image:
+    qr = qrcode.QRCode(
+        version=1,
+        error_correction=qrcode.constants.ERROR_CORRECT_M,
+        box_size=6,
+        border=2,
     )
-    st.session_state.lang = "zh" if lang_choice == "中文" else "en"
-    T = TEXTS[st.session_state.lang]
+    qr.add_data(url)
+    qr.make(fit=True)
+    return qr.make_image(fill_color="#111111", back_color="#ffffff").convert("RGB")
 
-    st.markdown("---")
+# ══════════════════════════════════════════════════════════════
+#  RENDER HELPERS
+# ══════════════════════════════════════════════════════════════
+def entry_html(item: dict) -> str:
+    badge_class = "entry-badge gold" if item.get("gold") else "entry-badge"
+    role_html = f'<div class="entry-role">{item["role"]}</div>' if item.get("role") else ""
+    return f"""
+    <div class="entry-wrap">
+        <div class="entry-top-row">
+            <div class="entry-org">
+                {item["org"]}
+                <span class="{badge_class}">{item["badge"]}</span>
+            </div>
+            <div class="entry-period">{item["period"]}</div>
+        </div>
+        {role_html}
+        <div class="entry-desc">{item["desc"]}</div>
+    </div>
+    """
 
-    # ── 照片：直接加载 012.psd 同目录文件 ──────────────────
-    st.image("012.psd", caption=T["sidebar_name"], use_container_width=True)
+def chips_html(dark: list, light: list) -> str:
+    d = "".join(f'<span class="chip-dark">{c}</span>' for c in dark)
+    l = "".join(f'<span class="chip-light">{c}</span>' for c in light)
+    return f'<div class="chips-wrap">{d}{l}</div>'
 
-    st.markdown("---")
-    st.subheader(f"📍 {T['contact_title']}")
-    st.markdown(T["email_label"])
-    st.caption("chenmiaohe7@gmail.com")
-    st.caption("602471974@qq.com")
-    st.markdown(T["phone_label"])
-    st.caption("🇨🇳 +86 158-9747-2620")
-    st.caption("🇺🇸 +1 (413) 272-5040")
+def research_items(items: list) -> str:
+    return "".join(f'<div class="research-item">{i}</div>' for i in items)
 
+def honour_items(items: list) -> str:
+    return "".join(f'<div class="honour-item">{i}</div>' for i in items)
+
+# ══════════════════════════════════════════════════════════════
+#  MAIN LAYOUT
+# ══════════════════════════════════════════════════════════════
 T = TEXTS[st.session_state.lang]
 
-# ══════════════════════════════════════════════════════════════
-#  HERO
-# ══════════════════════════════════════════════════════════════
+# ── Header: name/tagline left  |  photo + QR right ──────────
+col_left, col_right = st.columns([3, 1], gap="large")
+
+with col_left:
+    st.markdown(f"""
+    <div class="cv-name">{T["name"]}</div>
+    <div class="cv-tagline">{T["tagline"]}<br>{T["institution"]}</div>
+    <div class="cv-location">{T["location"]}</div>
+    <div class="cv-icon-row">
+        <a class="cv-icon-chip" href="mailto:chenmiaohe7@gmail.com">✉ chenmiaohe7@gmail.com</a>
+        <a class="cv-icon-chip" href="mailto:602471974@qq.com">✉ 602471974@qq.com</a>
+        <span class="cv-icon-chip">📱 +86 158-9747-2620</span>
+        <span class="cv-icon-chip">📱 +1 (413) 272-5040</span>
+    </div>
+    """, unsafe_allow_html=True)
+
+with col_right:
+    # Photo
+    try:
+        st.image("012.psd", use_container_width=True)
+    except Exception:
+        st.markdown(
+            "<div style='width:100%;aspect-ratio:1;background:#f0f0f0;"
+            "border:1px solid #ddd;border-radius:8px;display:flex;"
+            "align-items:center;justify-content:center;font-size:1.4rem;"
+            "color:#aaa;'>何</div>",
+            unsafe_allow_html=True
+        )
+    # QR code
+    qr_img = make_qr(YOUR_URL)
+    buf = BytesIO()
+    qr_img.save(buf, format="PNG")
+    buf.seek(0)
+    st.image(buf, use_container_width=True)
+    st.markdown(
+        f"<div style='text-align:center;font-family:IBM Plex Mono,monospace;"
+        f"font-size:0.65rem;color:#999;margin-top:-6px;'>{T['qr_label']}</div>",
+        unsafe_allow_html=True
+    )
+
+# ── Language toggle ──────────────────────────────────────────
+zh_active = "active" if st.session_state.lang == "zh" else ""
+en_active = "active" if st.session_state.lang == "en" else ""
 st.markdown(f"""
-<div class="hero">
-    <h1>{T["hero_title"]}</h1>
-    <div class="focus">{T["hero_focus"]}</div>
+<div class="lang-row">
+    <span class="lang-btn {zh_active}">{T["lang_zh"]}</span>
+    <span class="lang-btn {en_active}">{T["lang_en"]}</span>
 </div>
 """, unsafe_allow_html=True)
 
-# ══════════════════════════════════════════════════════════════
-#  TABS
-# ══════════════════════════════════════════════════════════════
-tab1, tab2, tab3, tab4 = st.tabs([
-    T["tab_edu"], T["tab_exp"], T["tab_res"], T["tab_hon"]
-])
+col_zh, col_en, _ = st.columns([1, 1, 4])
+with col_zh:
+    if st.button(T["lang_zh"], key="btn_zh", use_container_width=True):
+        st.session_state.lang = "zh"
+        st.rerun()
+with col_en:
+    if st.button(T["lang_en"], key="btn_en", use_container_width=True):
+        st.session_state.lang = "en"
+        st.rerun()
 
-# ── TAB 1: EDUCATION ─────────────────────────────────────────
-with tab1:
-    st.markdown(f'<div class="sec-title">{T["edu_title"]}</div>', unsafe_allow_html=True)
-    for edu in T["edu"]:
-        st.markdown(f"""
-        <div class="timeline-card">
-            <div class="org">{edu["school"]}</div>
-            <div class="sub">{edu["sub"]}</div>
-            <span class="period">🗓 {edu["period"]}</span>
-            <div class="detail" style="margin-top:4px;">{edu["degree"]}</div>
-            <div class="course-label">{edu["courses_label"]}</div>
-            <div class="detail">{edu["courses"]}</div>
-        </div>
-        """, unsafe_allow_html=True)
+# Re-resolve T after possible lang change
+T = TEXTS[st.session_state.lang]
 
-# ── TAB 2: EXPERIENCE ────────────────────────────────────────
-with tab2:
-    st.markdown(f'<div class="sec-title">{T["exp_title"]}</div>', unsafe_allow_html=True)
-    for exp in T["exp"]:
-        duties_html = "".join(f"<li>{d}</li>" for d in exp["duties"])
-        st.markdown(f"""
-        <div class="timeline-card">
-            <div class="org">{exp["org"]}</div>
-            <div class="sub">{exp["sub"]}</div>
-            <span class="period">🗓 {exp["period"]}</span>
-            <div class="role">— {exp["role"]}</div>
-            <ul class="detail" style="margin:4px 0 0 0; padding-left:1.2rem;">
-                {duties_html}
-            </ul>
-        </div>
-        """, unsafe_allow_html=True)
+st.markdown("<hr class='cv-divider'>", unsafe_allow_html=True)
 
-# ── TAB 3: RESEARCH ──────────────────────────────────────────
-with tab3:
-    st.markdown(f'<div class="sec-title">{T["res_title"]}</div>', unsafe_allow_html=True)
+# ── About ────────────────────────────────────────────────────
+st.markdown(f'<div class="sec-title">{T["sec_about"]}</div>', unsafe_allow_html=True)
+st.markdown(f'<div class="about-body">{T["about"]}</div>', unsafe_allow_html=True)
 
-    st.markdown(f"""
-    <div class="info-card">
-        <div class="label">{T["res_focus_label"]}</div>
-        <div style="font-size:0.92rem;color:#2d2d2d;line-height:1.7;">{T["res_focus_body"]}</div>
-    </div>
-    """, unsafe_allow_html=True)
+st.markdown("<hr class='cv-divider'>", unsafe_allow_html=True)
 
-    conf_items = "".join(f"<li>{c}</li>" for c in T["conferences"])
-    st.markdown(f"""
-    <div class="info-card">
-        <div class="label">{T["conf_label"]}</div>
-        <ul>{conf_items}</ul>
-    </div>
-    """, unsafe_allow_html=True)
+# ── Education ────────────────────────────────────────────────
+st.markdown(f'<div class="sec-title">{T["sec_edu"]}</div>', unsafe_allow_html=True)
+for item in T["edu"]:
+    st.markdown(entry_html(item), unsafe_allow_html=True)
 
-    ongoing_items = "".join(f"<li>{o}</li>" for o in T["ongoing"])
-    st.markdown(f"""
-    <div class="info-card">
-        <div class="label">{T["ongoing_label"]}</div>
-        <ul>{ongoing_items}</ul>
-    </div>
-    """, unsafe_allow_html=True)
+st.markdown("<hr class='cv-divider'>", unsafe_allow_html=True)
 
-# ── TAB 4: HONOURS & SKILLS ──────────────────────────────────
-with tab4:
-    st.markdown(f'<div class="sec-title">{T["hon_title"]}</div>', unsafe_allow_html=True)
+# ── Experience ───────────────────────────────────────────────
+st.markdown(f'<div class="sec-title">{T["sec_exp"]}</div>', unsafe_allow_html=True)
+for item in T["exp"]:
+    st.markdown(entry_html(item), unsafe_allow_html=True)
 
-    col_left, col_right = st.columns([1, 1], gap="large")
+st.markdown("<hr class='cv-divider'>", unsafe_allow_html=True)
 
-    with col_left:
-        awards_items = "".join(f"<li>{a}</li>" for a in T["awards"])
-        st.markdown(f"""
-        <div class="info-card">
-            <div class="label">🎓 {T["awards_label"]}</div>
-            <ul>{awards_items}</ul>
-        </div>
-        """, unsafe_allow_html=True)
+# ── Research ─────────────────────────────────────────────────
+st.markdown(f'<div class="sec-title">{T["sec_research"]}</div>', unsafe_allow_html=True)
+st.markdown(f'<div class="research-label">{T["research_focus_label"]}</div>', unsafe_allow_html=True)
+st.markdown(f'<div class="research-focus">{T["research_focus"]}</div>', unsafe_allow_html=True)
+st.markdown(f'<div class="research-label">{T["research_conf_label"]}</div>', unsafe_allow_html=True)
+st.markdown(research_items(T["research_conf"]), unsafe_allow_html=True)
+st.markdown(f'<div class="research-label">{T["research_ongoing_label"]}</div>', unsafe_allow_html=True)
+st.markdown(research_items(T["research_ongoing"]), unsafe_allow_html=True)
 
-        sports_items = "".join(f"<li>{s}</li>" for s in T["sports"])
-        st.markdown(f"""
-        <div class="info-card">
-            <div class="label">🏆 {T["sports_label"]}</div>
-            <ul>{sports_items}</ul>
-        </div>
-        """, unsafe_allow_html=True)
+st.markdown("<hr class='cv-divider'>", unsafe_allow_html=True)
 
-        lang_items = "".join(f"<li>{l}</li>" for l in T["lang_skills"])
-        st.markdown(f"""
-        <div class="info-card">
-            <div class="label">🌐 {T["lang_skill_label"]}</div>
-            <ul>{lang_items}</ul>
-        </div>
-        """, unsafe_allow_html=True)
+# ── Honours ──────────────────────────────────────────────────
+st.markdown(f'<div class="sec-title">{T["sec_honours"]}</div>', unsafe_allow_html=True)
+st.markdown(honour_items(T["honours"]), unsafe_allow_html=True)
 
-    with col_right:
-        cn_chips = "".join(f'<span class="cert-chip">✅ {c}</span>' for c in T["certs_sport"])
-        st.markdown(f"""
-        <div class="info-card">
-            <div class="label">📜 {T["certs_cn_title"]}</div>
-            <div style="margin-top:4px;">{cn_chips}</div>
-        </div>
-        """, unsafe_allow_html=True)
+st.markdown("<hr class='cv-divider'>", unsafe_allow_html=True)
 
-        intl_chips = "".join(f'<span class="cert-chip">🌏 {c}</span>' for c in T["certs_intl"])
-        st.markdown(f"""
-        <div class="info-card">
-            <div class="label">🌍 {T["certs_intl_title"]}</div>
-            <div style="margin-top:4px;">{intl_chips}</div>
-        </div>
-        """, unsafe_allow_html=True)
+# ── Certifications ───────────────────────────────────────────
+st.markdown(f'<div class="sec-title">{T["sec_certs"]}</div>', unsafe_allow_html=True)
+st.markdown(chips_html(T["certs_dark"], T["certs_light"]), unsafe_allow_html=True)
