@@ -563,7 +563,6 @@ with col_left:
     st.markdown(f"""
     <div class="cv-name">{T["name"]}</div>
     <div class="cv-tagline">{T["tagline"]}<br>{T["institution"]}</div>
-    <div class="cv-location">{T["location"]}</div>
     <div class="cv-icon-row">
         <a class="cv-icon-chip" href="mailto:chenmiaohe7@gmail.com">✉ chenmiaohe7@gmail.com</a>
         <a class="cv-icon-chip" href="mailto:602471974@qq.com">✉ 602471974@qq.com</a>
