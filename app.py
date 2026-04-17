@@ -1,12 +1,17 @@
 import streamlit as st
-import qrcode
 from io import BytesIO
-from PIL import Image
+
+try:
+    import qrcode
+    from PIL import Image
+    QR_AVAILABLE = True
+except ImportError:
+    QR_AVAILABLE = False
 
 st.set_page_config(
     page_title="何晨苗 | He Chenmiao",
     page_icon="🥊",
-    layout="centered",
+    layout="wide",
     initial_sidebar_state="collapsed"
 )
 
@@ -271,8 +276,9 @@ html, body, [class*="css"] {
 }
 .main { background-color: #ffffff; }
 .main .block-container {
-    max-width: 760px;
-    padding: 2.5rem 2rem 3rem;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2.5rem 3rem 3rem;
     background: #ffffff;
 }
 
@@ -507,19 +513,24 @@ if "lang" not in st.session_state:
 # ══════════════════════════════════════════════════════════════
 #  QR CODE GENERATOR
 # ══════════════════════════════════════════════════════════════
-YOUR_URL = "https://chenmiaoheprofile-keephungry.streamlit.app"  
+YOUR_URL = " https://chenmiaoheprofile-keephungry.streamlit.app"  # ← 替换成你的实际网址
 
 @st.cache_data
-def make_qr(url: str) -> Image.Image:
-    qr = qrcode.QRCode(
-        version=1,
-        error_correction=qrcode.constants.ERROR_CORRECT_M,
-        box_size=6,
-        border=2,
-    )
-    qr.add_data(url)
-    qr.make(fit=True)
-    return qr.make_image(fill_color="#111111", back_color="#ffffff").convert("RGB")
+def make_qr(url: str):
+    if not QR_AVAILABLE:
+        return None
+    try:
+        qr = qrcode.QRCode(
+            version=1,
+            error_correction=qrcode.constants.ERROR_CORRECT_M,
+            box_size=6,
+            border=2,
+        )
+        qr.add_data(url)
+        qr.make(fit=True)
+        return qr.make_image(fill_color="#111111", back_color="#ffffff").convert("RGB")
+    except Exception:
+        return None
 
 # ══════════════════════════════════════════════════════════════
 #  RENDER HELPERS
@@ -587,28 +598,45 @@ with col_right:
         )
     # QR code
     qr_img = make_qr(YOUR_URL)
-    buf = BytesIO()
-    qr_img.save(buf, format="PNG")
-    buf.seek(0)
-    st.image(buf, use_container_width=True)
-    st.markdown(
-        f"<div style='text-align:center;font-family:IBM Plex Mono,monospace;"
-        f"font-size:0.65rem;color:#999;margin-top:-6px;'>{T['qr_label']}</div>",
-        unsafe_allow_html=True
-    )
+    if qr_img is not None:
+        buf = BytesIO()
+        qr_img.save(buf, format="PNG")
+        buf.seek(0)
+        st.image(buf, use_container_width=True)
+        st.markdown(
+            f"<div style='text-align:center;font-family:IBM Plex Mono,monospace;"
+            f"font-size:0.65rem;color:#999;margin-top:-6px;'>{T['qr_label']}</div>",
+            unsafe_allow_html=True
+        )
+    else:
+        st.markdown(
+            f"<div style='text-align:center;font-size:0.65rem;color:#999;"
+            f"font-family:IBM Plex Mono,monospace;padding:6px 0;'>"
+            f"<a href='{YOUR_URL}' style='color:#999;'>{T['qr_label']}</a></div>",
+            unsafe_allow_html=True
+        )
 
-# ── Language toggle ──────────────────────────────────────────
-zh_active = "active" if st.session_state.lang == "zh" else ""
-en_active = "active" if st.session_state.lang == "en" else ""
-st.markdown(f"""
-<div class="lang-row">
-    <span class="lang-btn {zh_active}">{T["lang_zh"]}</span>
-    <span class="lang-btn {en_active}">{T["lang_en"]}</span>
-</div>
+# ── Language toggle (functional buttons styled as Jarocki toggle) ──
+st.markdown("""
+<style>
+/* target the two lang toggle buttons specifically */
+div[data-testid="stHorizontalBlock"]:has(button[kind="secondary"]) button[kind="secondary"] {
+    font-family: 'IBM Plex Mono', monospace !important;
+    font-size: 0.78rem !important;
+    border: 1px solid #dddddd !important;
+    border-radius: 3px !important;
+    color: #888888 !important;
+    background: #ffffff !important;
+    padding: 4px 14px !important;
+    height: auto !important;
+    min-height: unset !important;
+}
+</style>
 """, unsafe_allow_html=True)
 
-col_zh, col_en, _ = st.columns([1, 1, 4])
+col_zh, col_en, _ = st.columns([1, 1, 8])
 with col_zh:
+    zh_style = "background:#111;color:#fff;border:1px solid #111;" if st.session_state.lang == "zh" else ""
     if st.button(T["lang_zh"], key="btn_zh", use_container_width=True):
         st.session_state.lang = "zh"
         st.rerun()
