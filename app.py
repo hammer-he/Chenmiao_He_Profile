@@ -16,18 +16,20 @@ st.set_page_config(
 )
 
 # ══════════════════════════════════════════════════════════════
-#  BILINGUAL CONTENT — 中文版全中文 / English version all English
+#  BILINGUAL CONTENT
+#  中文版全中文 / English version all English
 # ══════════════════════════════════════════════════════════════
 TEXTS = {
     "zh": {
         "name":        "何晨苗",
-        "tagline":     "运动技能的发展与分析，女性体育教师的发展，拳击专项体能训练",
+        "tagline":     "运动技能的发展与分析 · 女性体育教师的发展 · 拳击专项体能训练",
         "institution": "北京体育大学硕士 / 春田学院访问学者",
+        "location":    "北京，中国 · 马萨诸塞州春田市，美国",
         "qr_label":    "扫码访问",
         "lang_zh":     "中文",
         "lang_en":     "English",
 
-        "sec_about":   "简介",
+        "sec_about": "简介",
         "about": (
             "专注于运动表现量化分析与循证研究。"
             "研究方向包括拳击技术动作自动化评估、运动干预与行为健康。"
@@ -67,18 +69,24 @@ TEXTS = {
         "exp": [
             {
                 "org":    "中国拳击协会",
+                "badge":  "实习生",
+                "gold":   False,
                 "period": "2025.5 — 2025.8",
                 "role":   "",
                 "desc":   "负责全国拳击比赛及教练员培训的组织与管理，负责国家队外事接待工作",
             },
             {
                 "org":    "春田市拳击队",
+                "badge":  "助理教练",
+                "gold":   True,
                 "period": "2025.9 — 2026.5",
                 "role":   "",
                 "desc":   "负责队员体能监测与数据分析，参与正式比赛裁判工作",
             },
             {
                 "org":    "北京体育大学附属竞技体育学院拳击队",
+                "badge":  "助理教练",
+                "gold":   False,
                 "period": "2023.9 — 2025.5",
                 "role":   "",
                 "desc":   "负责拳击队训练的组织与管理，参与技术分析与体育课程设计",
@@ -94,15 +102,22 @@ TEXTS = {
             "ICSPAH 年会 — 拳击技术动作发展序列构建",
             "哈佛国际教育论坛 — 新入职女性体育教师的职业困境",
         ],
+        "research_ongoing_label": "进行中项目",
+        "research_ongoing": [
+            "Meta 分析：运动锻炼对电子产品成瘾的干预效果（团队合作）",
+            "系统综述：题目待定（独立项目，方案设计阶段）",
+        ],
 
         "sec_honours": "运动经历与奖项",
         "honours": [
-            "全国大学生拳击竞标赛冠军",
+            "全国大学生拳击锦标赛冠军",
             "北京体育大学拳击比赛冠军",
             "哈巴罗夫斯克国际拳击邀请赛道德风尚奖",
             "湖南省永州市拳击比赛冠军",
             "湖南省长沙市棒垒球冠军",
             "美国大学生英式橄榄球联赛",
+            "John's Scholarship · 春田学院",
+            "二等奖学金 · 北京体育大学",
         ],
 
         "sec_certs": "资质证书",
@@ -122,15 +137,12 @@ TEXTS = {
             "托福 iBT 93",
             "中文 — 母语",
         ],
-
-        "contact_email_label": "邮箱",
-        "contact_phone_label": "电话",
     },
 
     "en": {
         "name":        "He Chenmiao (Meow)",
-        "tagline":     "Sport Science Researcher · Sports Performance Analysis · Boxing",
-        "institution": "Beijing Sport University / Springfield College Visiting Scholar",
+        "tagline":     "Motor Skill Development & Analysis · Female PE Teachers' Professional Development · Boxing Conditioning",
+        "institution": "Beijing Sport University Master's / Springfield College Visiting Scholar",
         "location":    "Beijing, China · Springfield, MA, USA",
         "qr_label":    "Scan to visit",
         "lang_zh":     "中文",
@@ -140,10 +152,9 @@ TEXTS = {
         "about": (
             "Sport science researcher focused on quantitative performance analysis "
             "and evidence-based practice. Research spans automated assessment of boxing "
-            "technique, exercise-behavioral health intervention, and physical education policy. "
+            "technique and exercise-behavioral health intervention. "
             "National Level-2 Boxing Athlete holding multiple domestic and international "
-            "professional licenses, committed to integrating rigorous research methods "
-            "with competitive sport practice."
+            "professional licenses, applying research to competitive sport practice."
         ),
 
         "sec_edu": "Education",
@@ -217,11 +228,14 @@ TEXTS = {
             "Systematic Review: Title in development (independent, protocol stage)",
         ],
 
-        "sec_honours": "Honours & Awards",
+        "sec_honours": "Athletic Experience & Awards",
         "honours": [
             "Champion · National Collegiate Boxing Championship",
             "Champion · BSU Boxing Competition",
-            "Champion · Yongzhou City Basketball Competition",
+            "Sportsmanship Award · Khabarovsk International Boxing Invitational",
+            "Champion · Yongzhou City Boxing Competition, Hunan",
+            "Champion · Changsha City Baseball & Softball, Hunan",
+            "USA Collegiate Rugby League",
             "John's Scholarship · Springfield College",
             "Second-Class Scholarship · Beijing Sport University",
         ],
@@ -234,7 +248,6 @@ TEXTS = {
             "National L3 Wushu Routines Referee Certificate",
             "National Jump Rope Instructor Certificate",
             "PE Teacher Qualification Certificate",
-            "Massachusetts PE Teacher License",
             "USA Boxing Officials License",
             "NSCA TSAC-F",
             "AHA CPR / AED",
@@ -245,18 +258,15 @@ TEXTS = {
             "English — Professional",
             "Chinese — Native",
         ],
-
-        "contact_email_label": "Email",
-        "contact_phone_label": "Phone",
     },
 }
 
 # ══════════════════════════════════════════════════════════════
-#  CSS — Jarocki style: pure white + dark gray + IBM Plex Mono
+#  CSS — Jarocki style · refined spacing
 # ══════════════════════════════════════════════════════════════
 st.markdown("""
 <style>
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600;700&display=swap');
 
 html, body, [class*="css"] {
     font-family: 'Inter', sans-serif;
@@ -266,124 +276,128 @@ html, body, [class*="css"] {
 .main .block-container {
     max-width: 900px;
     margin: 0 auto;
-    padding: 2.5rem 3rem 3rem;
+    padding: 2.8rem 3rem 4rem;
     background: #ffffff;
 }
 
-/* hide default streamlit chrome */
 [data-testid="stSidebar"] { display: none; }
 header[data-testid="stHeader"] { background: transparent; }
 footer { display: none; }
 
-/* ── Header ── */
+/* ── Name ── */
 .cv-name {
-    font-size: 2rem;
+    font-size: 1.9rem;
     font-weight: 700;
     color: #111111;
-    letter-spacing: -0.02em;
-    margin: 0 0 0.35rem;
+    letter-spacing: -0.025em;
+    margin: 0 0 0.4rem;
     line-height: 1.1;
 }
+
+/* ── Tagline & institution ── */
 .cv-tagline {
     font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.82rem;
+    font-size: 0.78rem;
     color: #444444;
-    line-height: 1.6;
-    margin: 0 0 0.35rem;
+    line-height: 1.65;
+    margin: 0 0 0.25rem;
+}
+.cv-institution {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    color: #666666;
+    line-height: 1.5;
+    margin: 0 0 0.3rem;
 }
 .cv-location {
-    font-size: 0.78rem;
-    color: #888888;
-    margin-bottom: 0.8rem;
+    font-size: 0.73rem;
+    color: #999999;
+    margin-bottom: 0.9rem;
+    font-family: 'IBM Plex Mono', monospace;
 }
+
+/* ── Contact chips ── */
 .cv-icon-row {
     display: flex;
-    gap: 7px;
+    gap: 6px;
     flex-wrap: wrap;
-    margin-bottom: 0;
 }
 .cv-icon-chip {
     display: inline-flex;
     align-items: center;
-    gap: 5px;
-    border: 1px solid #dddddd;
+    gap: 4px;
+    border: 1px solid #e0e0e0;
     border-radius: 4px;
-    padding: 3px 10px;
-    font-size: 0.75rem;
+    padding: 3px 9px;
+    font-size: 0.72rem;
     color: #444444;
     font-family: 'IBM Plex Mono', monospace;
     text-decoration: none;
     background: #ffffff;
+    transition: border-color 0.15s;
+}
+.cv-icon-chip:hover { border-color: #aaaaaa; }
+
+/* ── Divider ── */
+.cv-divider {
+    border: none;
+    border-top: 1px solid #eeeeee;
+    margin: 1.5rem 0;
 }
 
-/* ── Lang toggle ── */
-.lang-row {
-    display: flex;
-    gap: 6px;
-    margin: 1.4rem 0 1.8rem;
-}
-.lang-btn {
-    font-size: 0.78rem;
-    font-family: 'IBM Plex Mono', monospace;
-    padding: 4px 14px;
-    border: 1px solid #dddddd;
-    border-radius: 3px;
-    color: #888888;
-    background: #ffffff;
-    cursor: pointer;
-}
-.lang-btn.active {
-    background: #111111;
-    color: #ffffff;
-    border-color: #111111;
-}
-
-/* ── Section ── */
+/* ── Section title ── */
 .sec-title {
-    font-size: 1.05rem;
+    font-size: 0.97rem;
     font-weight: 700;
     color: #111111;
     letter-spacing: -0.01em;
-    margin: 0 0 0.75rem;
-    padding-bottom: 0.45rem;
-    border-bottom: 1px solid #f0f0f0;
+    margin: 0 0 0.8rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid #eeeeee;
 }
 
 /* ── About ── */
 .about-body {
     font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.82rem;
+    font-size: 0.79rem;
     color: #444444;
-    line-height: 1.75;
+    line-height: 1.8;
 }
 
-/* ── Entry (edu / exp) ── */
+/* ── Entry row ── */
 .entry-wrap {
-    margin-bottom: 1.1rem;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #f7f7f7;
+}
+.entry-wrap:last-of-type {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
 }
 .entry-top-row {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
     gap: 8px;
-    margin-bottom: 0.15rem;
+    margin-bottom: 0.18rem;
 }
 .entry-org {
-    font-size: 0.92rem;
+    font-size: 0.9rem;
     font-weight: 700;
     color: #111111;
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 7px;
     flex-wrap: wrap;
 }
 .entry-badge {
     font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.7rem;
+    font-size: 0.67rem;
     font-weight: 400;
     color: #555555;
-    background: #f0f0f0;
-    border: 1px solid #e0e0e0;
+    background: #f2f2f2;
+    border: 1px solid #e2e2e2;
     border-radius: 3px;
     padding: 1px 8px;
 }
@@ -394,100 +408,120 @@ footer { display: none; }
 }
 .entry-period {
     font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.78rem;
-    color: #888888;
+    font-size: 0.74rem;
+    color: #999999;
     white-space: nowrap;
     flex-shrink: 0;
 }
 .entry-role {
     font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.8rem;
+    font-size: 0.77rem;
     color: #333333;
     margin-bottom: 0.2rem;
 }
 .entry-desc {
     font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.77rem;
+    font-size: 0.74rem;
     color: #666666;
-    line-height: 1.65;
+    line-height: 1.7;
 }
 
 /* ── Research ── */
 .research-label {
     font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.7rem;
+    font-size: 0.67rem;
     font-weight: 500;
-    color: #888888;
+    color: #999999;
     text-transform: uppercase;
-    letter-spacing: 0.06em;
-    margin: 0.8rem 0 0.3rem;
+    letter-spacing: 0.07em;
+    margin: 0.85rem 0 0.3rem;
 }
 .research-focus {
     font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.82rem;
+    font-size: 0.79rem;
     color: #333333;
-    line-height: 1.6;
+    line-height: 1.65;
 }
 .research-item {
     font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.78rem;
+    font-size: 0.76rem;
     color: #555555;
-    line-height: 1.7;
-    padding-left: 1rem;
+    line-height: 1.75;
+    padding-left: 1.1rem;
     position: relative;
 }
 .research-item::before {
     content: "—";
     position: absolute;
     left: 0;
-    color: #aaaaaa;
+    color: #cccccc;
 }
 
 /* ── Honours ── */
 .honour-item {
     font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.8rem;
+    font-size: 0.77rem;
     color: #444444;
-    line-height: 1.7;
-    padding-left: 1rem;
+    line-height: 1.75;
+    padding-left: 1.1rem;
     position: relative;
 }
 .honour-item::before {
     content: "—";
     position: absolute;
     left: 0;
-    color: #aaaaaa;
+    color: #cccccc;
 }
 
 /* ── Cert chips ── */
 .chips-wrap {
     display: flex;
     flex-wrap: wrap;
-    gap: 6px;
+    gap: 7px;
+    line-height: 1;
 }
 .chip-dark {
     background: #111111;
     color: #ffffff;
     border-radius: 4px;
     font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.75rem;
+    font-size: 0.72rem;
     padding: 4px 11px;
 }
 .chip-light {
     background: #f5f5f5;
-    color: #333333;
-    border: 1px solid #e0e0e0;
+    color: #444444;
+    border: 1px solid #e2e2e2;
     border-radius: 4px;
     font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.75rem;
+    font-size: 0.72rem;
     padding: 4px 11px;
 }
 
-/* ── Divider ── */
-.cv-divider {
-    border: none;
-    border-top: 1px solid #f0f0f0;
-    margin: 1.6rem 0;
+/* ── QR caption ── */
+.qr-caption {
+    text-align: center;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.62rem;
+    color: #aaaaaa;
+    margin-top: -4px;
+}
+
+/* ── Streamlit button overrides for lang toggle ── */
+[data-testid="stHorizontalBlock"] button {
+    font-family: 'IBM Plex Mono', monospace !important;
+    font-size: 0.76rem !important;
+    border: 1px solid #dddddd !important;
+    border-radius: 3px !important;
+    padding: 0.25rem 0.75rem !important;
+    background: #ffffff !important;
+    color: #888888 !important;
+    height: 2rem !important;
+    min-height: unset !important;
+}
+[data-testid="stHorizontalBlock"] button:hover {
+    border-color: #aaaaaa !important;
+    color: #333333 !important;
 }
 </style>
 """, unsafe_allow_html=True)
@@ -499,9 +533,9 @@ if "lang" not in st.session_state:
     st.session_state.lang = "zh"
 
 # ══════════════════════════════════════════════════════════════
-#  QR CODE GENERATOR
+#  QR CODE
 # ══════════════════════════════════════════════════════════════
-YOUR_URL = " https://chenmiaoheprofile-keephungry.streamlit.app"  # ← 替换成你的实际网址
+YOUR_URL = "https://chenmiaoheprofile-keephungry.streamlit.app"
 
 @st.cache_data
 def make_qr(url: str):
@@ -524,156 +558,118 @@ def make_qr(url: str):
 #  RENDER HELPERS
 # ══════════════════════════════════════════════════════════════
 def entry_html(item: dict) -> str:
-    badge_class = "entry-badge gold" if item.get("gold") else "entry-badge"
-    role_html = f'<div class="entry-role">{item["role"]}</div>' if item.get("role") else ""
+    badge = item.get("badge", "")
+    gold  = item.get("gold", False)
+    badge_class = "entry-badge gold" if gold else "entry-badge"
+    badge_html  = f'<span class="{badge_class}">{badge}</span>' if badge else ""
+    role_html   = f'<div class="entry-role">{item["role"]}</div>' if item.get("role") else ""
     return f"""
-    <div class="entry-wrap">
-        <div class="entry-top-row">
-            <div class="entry-org">
-                {item["org"]}
-                <span class="{badge_class}">{item["badge"]}</span>
-            </div>
-            <div class="entry-period">{item["period"]}</div>
-        </div>
-        {role_html}
-        <div class="entry-desc">{item["desc"]}</div>
+<div class="entry-wrap">
+    <div class="entry-top-row">
+        <div class="entry-org">{item["org"]}{badge_html}</div>
+        <div class="entry-period">{item["period"]}</div>
     </div>
-    """
+    {role_html}
+    <div class="entry-desc">{item["desc"]}</div>
+</div>"""
 
 def chips_html(dark: list, light: list) -> str:
     d = "".join(f'<span class="chip-dark">{c}</span>' for c in dark)
     l = "".join(f'<span class="chip-light">{c}</span>' for c in light)
     return f'<div class="chips-wrap">{d}{l}</div>'
 
-def research_items(items: list) -> str:
-    return "".join(f'<div class="research-item">{i}</div>' for i in items)
-
-def honour_items(items: list) -> str:
-    return "".join(f'<div class="honour-item">{i}</div>' for i in items)
+def list_items(items: list, css_class: str) -> str:
+    return "".join(f'<div class="{css_class}">{i}</div>' for i in items)
 
 # ══════════════════════════════════════════════════════════════
-#  MAIN LAYOUT
+#  PAGE
 # ══════════════════════════════════════════════════════════════
 T = TEXTS[st.session_state.lang]
 
-# ── Header: name/tagline left  |  photo + QR right ──────────
+# ── HEADER ──────────────────────────────────────────────────
 col_left, col_right = st.columns([3, 1], gap="large")
 
 with col_left:
     st.markdown(f"""
-    <div class="cv-name">{T["name"]}</div>
-    <div class="cv-tagline">{T["tagline"]}<br>{T["institution"]}</div>
-    <div class="cv-icon-row">
-        <a class="cv-icon-chip" href="mailto:chenmiaohe7@gmail.com">✉ chenmiaohe7@gmail.com</a>
-        <a class="cv-icon-chip" href="mailto:602471974@qq.com">✉ 602471974@qq.com</a>
-        <span class="cv-icon-chip">📱 +86 158-9747-2620</span>
-        <span class="cv-icon-chip">📱 +1 (413) 272-5040</span>
-    </div>
-    """, unsafe_allow_html=True)
+<div class="cv-name">{T["name"]}</div>
+<div class="cv-tagline">{T["tagline"]}</div>
+<div class="cv-institution">{T["institution"]}</div>
+<div class="cv-location">{T["location"]}</div>
+<div class="cv-icon-row">
+    <a class="cv-icon-chip" href="mailto:chenmiaohe7@gmail.com">✉ chenmiaohe7@gmail.com</a>
+    <a class="cv-icon-chip" href="mailto:602471974@qq.com">✉ 602471974@qq.com</a>
+    <span class="cv-icon-chip">📱 +86 158-9747-2620</span>
+    <span class="cv-icon-chip">📱 +1 (413) 272-5040</span>
+</div>
+""", unsafe_allow_html=True)
 
 with col_right:
-    # Photo
     try:
         st.image("012.psd", use_container_width=True)
     except Exception:
         st.markdown(
-            "<div style='width:100%;aspect-ratio:1;background:#f0f0f0;"
-            "border:1px solid #ddd;border-radius:8px;display:flex;"
-            "align-items:center;justify-content:center;font-size:1.4rem;"
-            "color:#aaa;'>何</div>",
+            "<div style='width:100%;aspect-ratio:1;background:#f5f5f5;"
+            "border:1px solid #e0e0e0;border-radius:8px;display:flex;"
+            "align-items:center;justify-content:center;"
+            "font-size:1.8rem;color:#bbb;'>何</div>",
             unsafe_allow_html=True
         )
-    # QR code
     qr_img = make_qr(YOUR_URL)
     if qr_img is not None:
         buf = BytesIO()
         qr_img.save(buf, format="PNG")
         buf.seek(0)
         st.image(buf, use_container_width=True)
-        st.markdown(
-            f"<div style='text-align:center;font-family:IBM Plex Mono,monospace;"
-            f"font-size:0.65rem;color:#999;margin-top:-6px;'>{T['qr_label']}</div>",
-            unsafe_allow_html=True
-        )
-    else:
-        st.markdown(
-            f"<div style='text-align:center;font-size:0.65rem;color:#999;"
-            f"font-family:IBM Plex Mono,monospace;padding:6px 0;'>"
-            f"<a href='{YOUR_URL}' style='color:#999;'>{T['qr_label']}</a></div>",
-            unsafe_allow_html=True
-        )
+    st.markdown(f'<div class="qr-caption">{T["qr_label"]}</div>', unsafe_allow_html=True)
 
-# ── Language toggle (functional buttons styled as Jarocki toggle) ──
-st.markdown("""
-<style>
-/* target the two lang toggle buttons specifically */
-div[data-testid="stHorizontalBlock"]:has(button[kind="secondary"]) button[kind="secondary"] {
-    font-family: 'IBM Plex Mono', monospace !important;
-    font-size: 0.78rem !important;
-    border: 1px solid #dddddd !important;
-    border-radius: 3px !important;
-    color: #888888 !important;
-    background: #ffffff !important;
-    padding: 4px 14px !important;
-    height: auto !important;
-    min-height: unset !important;
-}
-</style>
-""", unsafe_allow_html=True)
-
-col_zh, col_en, _ = st.columns([1, 1, 8])
-with col_zh:
-    zh_style = "background:#111;color:#fff;border:1px solid #111;" if st.session_state.lang == "zh" else ""
+# ── LANGUAGE TOGGLE ─────────────────────────────────────────
+st.markdown("<div style='height:0.6rem'></div>", unsafe_allow_html=True)
+c_zh, c_en, c_pad = st.columns([1, 1, 8])
+with c_zh:
     if st.button(T["lang_zh"], key="btn_zh", use_container_width=True):
         st.session_state.lang = "zh"
         st.rerun()
-with col_en:
+with c_en:
     if st.button(T["lang_en"], key="btn_en", use_container_width=True):
         st.session_state.lang = "en"
         st.rerun()
 
-# Re-resolve T after possible lang change
 T = TEXTS[st.session_state.lang]
 
+# ── ABOUT ───────────────────────────────────────────────────
 st.markdown("<hr class='cv-divider'>", unsafe_allow_html=True)
-
-# ── About ────────────────────────────────────────────────────
 st.markdown(f'<div class="sec-title">{T["sec_about"]}</div>', unsafe_allow_html=True)
 st.markdown(f'<div class="about-body">{T["about"]}</div>', unsafe_allow_html=True)
 
+# ── EDUCATION ───────────────────────────────────────────────
 st.markdown("<hr class='cv-divider'>", unsafe_allow_html=True)
-
-# ── Education ────────────────────────────────────────────────
 st.markdown(f'<div class="sec-title">{T["sec_edu"]}</div>', unsafe_allow_html=True)
 for item in T["edu"]:
     st.markdown(entry_html(item), unsafe_allow_html=True)
 
+# ── EXPERIENCE ──────────────────────────────────────────────
 st.markdown("<hr class='cv-divider'>", unsafe_allow_html=True)
-
-# ── Experience ───────────────────────────────────────────────
 st.markdown(f'<div class="sec-title">{T["sec_exp"]}</div>', unsafe_allow_html=True)
 for item in T["exp"]:
     st.markdown(entry_html(item), unsafe_allow_html=True)
 
+# ── RESEARCH ────────────────────────────────────────────────
 st.markdown("<hr class='cv-divider'>", unsafe_allow_html=True)
-
-# ── Research ─────────────────────────────────────────────────
 st.markdown(f'<div class="sec-title">{T["sec_research"]}</div>', unsafe_allow_html=True)
 st.markdown(f'<div class="research-label">{T["research_focus_label"]}</div>', unsafe_allow_html=True)
 st.markdown(f'<div class="research-focus">{T["research_focus"]}</div>', unsafe_allow_html=True)
 st.markdown(f'<div class="research-label">{T["research_conf_label"]}</div>', unsafe_allow_html=True)
-st.markdown(research_items(T["research_conf"]), unsafe_allow_html=True)
+st.markdown(list_items(T["research_conf"], "research-item"), unsafe_allow_html=True)
 st.markdown(f'<div class="research-label">{T["research_ongoing_label"]}</div>', unsafe_allow_html=True)
-st.markdown(research_items(T["research_ongoing"]), unsafe_allow_html=True)
+st.markdown(list_items(T["research_ongoing"], "research-item"), unsafe_allow_html=True)
 
+# ── HONOURS ─────────────────────────────────────────────────
 st.markdown("<hr class='cv-divider'>", unsafe_allow_html=True)
-
-# ── Honours ──────────────────────────────────────────────────
 st.markdown(f'<div class="sec-title">{T["sec_honours"]}</div>', unsafe_allow_html=True)
-st.markdown(honour_items(T["honours"]), unsafe_allow_html=True)
+st.markdown(list_items(T["honours"], "honour-item"), unsafe_allow_html=True)
 
+# ── CERTIFICATIONS ──────────────────────────────────────────
 st.markdown("<hr class='cv-divider'>", unsafe_allow_html=True)
-
-# ── Certifications ───────────────────────────────────────────
 st.markdown(f'<div class="sec-title">{T["sec_certs"]}</div>', unsafe_allow_html=True)
 st.markdown(chips_html(T["certs_dark"], T["certs_light"]), unsafe_allow_html=True)
+st.markdown("<div style='height:1rem'></div>", unsafe_allow_html=True)
