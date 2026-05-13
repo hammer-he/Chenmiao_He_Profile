@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>何晨苗 | He Chenmiao</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🥊</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  font-family: 'Inter', sans-serif;
+  background: #ffffff;
+  color: #111111;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.page {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 3.5rem 3.5rem 5rem;
+}
+
+/* ── Header ── */
+.header-wrap {
+  display: grid;
+  grid-template-columns: 1fr 140px;
+  gap: 2.5rem;
+  align-items: start;
+  margin-bottom: 1.2rem;
+}
+
+.cv-name {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #111111;
+  letter-spacing: -0.03em;
+  margin-bottom: 0.55rem;
+  line-height: 1.05;
+}
+.cv-tagline {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.8rem;
+  color: #555555;
+  line-height: 1.7;
+  margin-bottom: 0.3rem;
+}
+.cv-institution {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.78rem;
+  color: #777777;
+  line-height: 1.6;
+  margin-bottom: 0.3rem;
+}
+.cv-location {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.72rem;
+  color: #aaaaaa;
+  margin-bottom: 1.1rem;
+}
+.cv-icon-row {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.cv-icon-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  border: 1px solid #e4e4e4;
+  border-radius: 5px;
+  padding: 4px 10px;
+  font-size: 0.71rem;
+  color: #555555;
+  font-family: 'IBM Plex Mono', monospace;
+  text-decoration: none;
+  background: #fafafa;
+  transition: border-color 0.15s, background 0.15s;
+}
+.cv-icon-chip:hover { border-color: #aaaaaa; background: #ffffff; }
+
+/* ── Right column ── */
+.col-right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+}
+.profile-photo {
+  width: 100%;
+  aspect-ratio: 1;
+  background: #f0f0f0;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  color: #bbb;
+  overflow: hidden;
+}
+.profile-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  border-radius: 10px;
+}
+#qrcode {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+#qrcode canvas, #qrcode img { width: 100% !important; height: auto !important; }
+.qr-caption {
+  text-align: center;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.6rem;
+  color: #bbbbbb;
+  letter-spacing: 0.03em;
+}
+
+/* ── Lang toggle ── */
+.lang-toggle {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 0.2rem;
+}
+.lang-btn {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.72rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  padding: 0.28rem 0.9rem;
+  background: #ffffff;
+  color: #999999;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s;
+}
+.lang-btn:hover { border-color: #aaaaaa; color: #444444; }
+.lang-btn.active { border-color: #333333; color: #111111; background: #f8f8f8; }
+
+/* ── Divider ── */
+.cv-divider {
+  border: none;
+  border-top: 1px solid #efefef;
+  margin: 1.8rem 0 1.4rem;
+}
+
+/* ── Section title ── */
+.sec-title {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #111111;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #efefef;
+}
+
+/* ── About ── */
+.about-body {
+  font-size: 0.88rem;
+  color: #444444;
+  line-height: 1.85;
+  max-width: 680px;
+}
+
+/* ── Entry ── */
+.entry-wrap {
+  margin-bottom: 1.2rem;
+  padding-bottom: 1.2rem;
+  border-bottom: 1px solid #f5f5f5;
+}
+.entry-wrap:last-of-type { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+.entry-top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 0.25rem;
+}
+.entry-org {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #111111;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.entry-badge {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.65rem;
+  font-weight: 400;
+  color: #666666;
+  background: #f3f3f3;
+  border: 1px solid #e4e4e4;
+  border-radius: 3px;
+  padding: 2px 8px;
+}
+.entry-badge.gold {
+  background: #fef9ee;
+  border-color: #e8d090;
+  color: #7a5808;
+}
+.entry-period {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.72rem;
+  color: #aaaaaa;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.entry-role {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.78rem;
+  color: #555555;
+  margin-bottom: 0.3rem;
+}
+.entry-desc {
+  font-size: 0.84rem;
+  color: #666666;
+  line-height: 1.75;
+}
+
+/* ── Research ── */
+.research-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.63rem;
+  font-weight: 500;
+  color: #aaaaaa;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  margin: 1rem 0 0.4rem;
+}
+.research-focus {
+  font-size: 0.87rem;
+  color: #333333;
+  line-height: 1.7;
+}
+.research-item {
+  font-size: 0.84rem;
+  color: #555555;
+  line-height: 1.8;
+  padding-left: 1.2rem;
+  position: relative;
+}
+.research-item::before {
+  content: "—";
+  position: absolute;
+  left: 0;
+  color: #dddddd;
+}
+
+/* ── Honours ── */
+.honour-item {
+  font-size: 0.85rem;
+  color: #444444;
+  line-height: 1.85;
+  padding-left: 1.2rem;
+  position: relative;
+}
+.honour-item::before {
+  content: "—";
+  position: absolute;
+  left: 0;
+  color: #dddddd;
+}
+
+/* ── Cert chips ── */
+.chips-wrap { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip-dark {
+  background: #111111;
+  color: #ffffff;
+  border-radius: 5px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.73rem;
+  padding: 5px 12px;
+  line-height: 1.4;
+}
+.chip-light {
+  background: #f5f5f5;
+  color: #555555;
+  border: 1px solid #e4e4e4;
+  border-radius: 5px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.73rem;
+  padding: 5px 12px;
+  line-height: 1.4;
+}
+
+/* ── Hidden lang sections ── */
+[data-lang] { display: none; }
+[data-lang].active { display: block; }
+
+@media (max-width: 640px) {
+  .page { padding: 2rem 1.4rem 3.5rem; }
+  .header-wrap { grid-template-columns: 1fr; }
+  .col-right { flex-direction: row; align-items: flex-start; gap: 1rem; }
+  .profile-photo, #qrcode { width: 90px; flex-shrink: 0; }
+  .cv-name { font-size: 1.7rem; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ── HEADER ── -->
+  <div class="header-wrap">
+    <div class="col-left">
+      <div data-lang="zh" class="active">
+        <div class="cv-name">何晨苗</div>
+        <div class="cv-tagline">运动技能的发展与分析 · 女性体育教师的发展 · 拳击专项体能训练</div>
+        <div class="cv-institution">北京体育大学硕士 / 春田学院访问学者</div>
+        <div class="cv-location">北京，中国 · 马萨诸塞州春田市，美国</div>
+      </div>
+      <div data-lang="en">
+        <div class="cv-name">He Chenmiao (Meow)</div>
+        <div class="cv-tagline">Motor Skill Development &amp; Analysis · Female PE Teachers' Professional Development · Boxing Conditioning</div>
+        <div class="cv-institution">Beijing Sport University Master's / Springfield College Visiting Scholar</div>
+        <div class="cv-location">Beijing, China · Springfield, MA, USA</div>
+      </div>
+      <div class="cv-icon-row">
+        <a class="cv-icon-chip" href="mailto:chenmiaohe7@gmail.com">✉ chenmiaohe7@gmail.com</a>
+        <a class="cv-icon-chip" href="mailto:602471974@qq.com">✉ 602471974@qq.com</a>
+        <span class="cv-icon-chip">📱 +86 158-9747-2620</span>
+        <span class="cv-icon-chip">📱 +1 (413) 272-5040</span>
+      </div>
+    </div>
+
+    <div class="col-right">
+      <div class="profile-photo" id="profile-photo-wrap">
+        <img src="photo.jpg" alt="何晨苗" onerror="this.parentElement.innerHTML='何'">
+      </div>
+      <div id="qrcode"></div>
+      <div class="qr-caption">
+        <span data-lang="zh" class="active">扫码访问</span>
+        <span data-lang="en">Scan to visit</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── LANG TOGGLE ── -->
+  <div class="lang-toggle">
+    <button class="lang-btn active" id="btn-zh" onclick="setLang('zh')">中文</button>
+    <button class="lang-btn" id="btn-en" onclick="setLang('en')">English</button>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════ -->
+  <!-- ABOUT -->
+  <!-- ══════════════════════════════════════════════════════ -->
+  <hr class="cv-divider">
+  <div data-lang="zh" class="active">
+    <div class="sec-title">简介</div>
+    <div class="about-body">专注于运动表现量化分析与循证研究。研究方向包括拳击技术动作自动化评估、运动干预与行为健康。国家二级拳击运动员，拥有国内外多项专业执照，将科研服务于体育实践。</div>
+  </div>
+  <div data-lang="en">
+    <div class="sec-title">About</div>
+    <div class="about-body">Sport science researcher focused on quantitative performance analysis and evidence-based practice. Research spans automated assessment of boxing technique and exercise-behavioral health intervention. National Level-2 Boxing Athlete holding multiple domestic and international professional licenses, applying research to competitive sport practice.</div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════ -->
+  <!-- EDUCATION -->
+  <!-- ══════════════════════════════════════════════════════ -->
+  <hr class="cv-divider">
+  <div data-lang="zh" class="active">
+    <div class="sec-title">教育背景</div>
+    <div class="entry-wrap">
+      <div class="entry-top-row">
+        <div class="entry-org">北京体育大学<span class="entry-badge">硕士研究生</span></div>
+        <div class="entry-period">2023 — 2026</div>
+      </div>
+      <div class="entry-role">体育教育训练学</div>
+      <div class="entry-desc">运动生理学原理 · 运动训练学原理 · 体育教学论 · 体育科研方法</div>
+    </div>
+    <div class="entry-wrap">
+      <div class="entry-top-row">
+        <div class="entry-org">春田学院<span class="entry-badge gold">访问学者</span></div>
+        <div class="entry-period">2025 — 2026</div>
+      </div>
+      <div class="entry-role">体育教育训练学</div>
+      <div class="entry-desc">运动科学数据分析 · 高级统计学 · 循证实践 · 运动技能发展与评估</div>
+    </div>
+    <div class="entry-wrap">
+      <div class="entry-top-row">
+        <div class="entry-org">湖南师范大学树达学院<span class="entry-badge">学士学位</span></div>
+        <div class="entry-period">2019 — 2023</div>
+      </div>
+      <div class="entry-role">社会体育指导与管理</div>
+      <div class="entry-desc">体育管理学 · 篮球 · 足球 · 羽毛球 · 体育舞蹈 · 空手道</div>
+    </div>
+  </div>
+  <div data-lang="en">
+    <div class="sec-title">Education</div>
+    <div class="entry-wrap">
+      <div class="entry-top-row">
+        <div class="entry-org">Beijing Sport University<span class="entry-badge">Master's</span></div>
+        <div class="entry-period">2023 — 2026</div>
+      </div>
+      <div class="entry-role">Sport Education &amp; Training</div>
+      <div class="entry-desc">Exercise Physiology · Sport Training Theory · PE Pedagogy · Research Methods in Sport Science</div>
+    </div>
+    <div class="entry-wrap">
+      <div class="entry-top-row">
+        <div class="entry-org">Springfield College<span class="entry-badge gold">Visiting Scholar</span></div>
+        <div class="entry-period">2025 — 2026</div>
+      </div>
+      <div class="entry-role">Sport Education &amp; Training</div>
+      <div class="entry-desc">Data Analytics in Sport Science · Advanced Statistics · Evidence-Based Practice · Motor Skill Development &amp; Assessment</div>
+    </div>
+    <div class="entry-wrap">
+      <div class="entry-top-row">
+        <div class="entry-org">Hunan Normal University Shuda College<span class="entry-badge">Bachelor's</span></div>
+        <div class="entry-period">2019 — 2023</div>
+      </div>
+      <div class="entry-role">Social Sport Instruction &amp; Management</div>
+      <div class="entry-desc">Sport Management · Basketball · Football · Badminton · Sport Dance · Karate</div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════ -->
+  <!-- EXPERIENCE -->
+  <!-- ══════════════════════════════════════════════════════ -->
+  <hr class="cv-divider">
+  <div data-lang="zh" class="active">
+    <div class="sec-title">实践经验</div>
+    <div class="entry-wrap">
+      <div class="entry-top-row">
+        <div class="entry-org">中国拳击协会<span class="entry-badge">实习生</span></div>
+        <div class="entry-period">2025.5 — 2025.8</div>
+      </div>
+      <div class="entry-desc">负责全国拳击比赛及教练员培训的组织与管理，负责国家队外事接待工作</div>
+    </div>
+    <div class="entry-wrap">
+      <div class="entry-top-row">
+        <div class="entry-org">春田市拳击队<span class="entry-badge gold">助理教练</span></div>
+        <div class="entry-period">2025.9 — 2026.5</div>
+      </div>
+      <div class="entry-desc">负责队员体能监测与数据分析，参与正式比赛裁判工作</div>
+    </div>
+    <div class="entry-wrap">
+      <div class="entry-top-row">
+        <div class="entry-org">北京体育大学附属竞技体育学院拳击队<span class="entry-badge">助理教练</span></div>
+        <div class="entry-period">2023.9 — 2025.5</div>
+      </div>
+      <div class="entry-desc">负责拳击队训练的组织与管理，参与技术分析与体育课程设计</div>
+    </div>
+  </div>
+  <div data-lang="en">
+    <div class="sec-title">Experience</div>
+    <div class="entry-wrap">
+      <div class="entry-top-row">
+        <div class="entry-org">China Boxing Association<span class="entry-badge">Intern</span></div>
+        <div class="entry-period">May 2025 — Aug 2025</div>
+      </div>
+      <div class="entry-desc">Organised national boxing competitions and coaching certification programmes; coordinated international affairs and delegation reception for the national team</div>
+    </div>
+    <div class="entry-wrap">
+      <div class="entry-top-row">
+        <div class="entry-org">Springfield Boxing Team<span class="entry-badge gold">Assistant Coach</span></div>
+        <div class="entry-period">Sep 2025 — May 2026</div>
+      </div>
+      <div class="entry-desc">Conducted athlete fitness monitoring and performance data analysis; served as a certified official in formal competitive bouts</div>
+    </div>
+    <div class="entry-wrap">
+      <div class="entry-top-row">
+        <div class="entry-org">BSU Affiliated School of Competitive Sports · Boxing Team<span class="entry-badge">Assistant Coach</span></div>
+        <div class="entry-period">Sep 2023 — May 2025</div>
+      </div>
+      <div class="entry-desc">Managed daily organisation and training of the boxing squad; contributed to technical analysis and sport curriculum design</div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════ -->
+  <!-- RESEARCH -->
+  <!-- ══════════════════════════════════════════════════════ -->
+  <hr class="cv-divider">
+  <div data-lang="zh" class="active">
+    <div class="sec-title">科研成果</div>
+    <div class="research-label">研究方向</div>
+    <div class="research-focus">拳击技术动作自动化评估 · 新入职体育教师专业发展支持</div>
+    <div class="research-label">国际会议报告</div>
+    <div class="research-item">SHAPE America National Convention</div>
+    <div class="research-item">ICSPAH 年会 — 拳击技术动作发展序列构建</div>
+    <div class="research-item">哈佛国际教育论坛 — 新入职女性体育教师的职业困境</div>
+    <div class="research-label">进行中项目</div>
+    <div class="research-item">Meta 分析：运动锻炼对电子产品成瘾的干预效果（团队合作）</div>
+    <div class="research-item">系统综述：题目待定（独立项目，方案设计阶段）</div>
+  </div>
+  <div data-lang="en">
+    <div class="sec-title">Research</div>
+    <div class="research-label">Research Focus</div>
+    <div class="research-focus">Automated assessment of boxing technical movements · Professional support for newly employed PE teachers</div>
+    <div class="research-label">Conference Presentations</div>
+    <div class="research-item">SHAPE America National Convention</div>
+    <div class="research-item">ICSPAH Annual Conference — Boxing Technical Movement Development Sequence</div>
+    <div class="research-item">Harvard International Education Forum — Dilemmas of Newly Employed Female PE Teachers</div>
+    <div class="research-label">Ongoing Projects</div>
+    <div class="research-item">Meta-Analysis: Effect of exercise on electronic device addiction (team project, in progress)</div>
+    <div class="research-item">Systematic Review: Title in development (independent, protocol stage)</div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════ -->
+  <!-- HONOURS -->
+  <!-- ══════════════════════════════════════════════════════ -->
+  <hr class="cv-divider">
+  <div data-lang="zh" class="active">
+    <div class="sec-title">运动经历与奖项</div>
+    <div class="honour-item">全国大学生拳击锦标赛冠军</div>
+    <div class="honour-item">北京体育大学拳击比赛冠军</div>
+    <div class="honour-item">哈巴罗夫斯克国际拳击邀请赛道德风尚奖</div>
+    <div class="honour-item">湖南省永州市拳击比赛冠军</div>
+    <div class="honour-item">湖南省长沙市棒垒球冠军</div>
+    <div class="honour-item">美国大学生英式橄榄球联赛</div>
+    <div class="honour-item">John's Scholarship · 春田学院</div>
+    <div class="honour-item">二等奖学金 · 北京体育大学</div>
+  </div>
+  <div data-lang="en">
+    <div class="sec-title">Athletic Experience &amp; Awards</div>
+    <div class="honour-item">Champion · National Collegiate Boxing Championship</div>
+    <div class="honour-item">Champion · BSU Boxing Competition</div>
+    <div class="honour-item">Sportsmanship Award · Khabarovsk International Boxing Invitational</div>
+    <div class="honour-item">Champion · Yongzhou City Boxing Competition, Hunan</div>
+    <div class="honour-item">Champion · Changsha City Baseball &amp; Softball, Hunan</div>
+    <div class="honour-item">USA Collegiate Rugby League</div>
+    <div class="honour-item">John's Scholarship · Springfield College</div>
+    <div class="honour-item">Second-Class Scholarship · Beijing Sport University</div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════ -->
+  <!-- CERTIFICATIONS -->
+  <!-- ══════════════════════════════════════════════════════ -->
+  <hr class="cv-divider">
+  <div data-lang="zh" class="active">
+    <div class="sec-title">资质证书</div>
+    <div class="chips-wrap">
+      <span class="chip-dark">国家二级拳击运动员证</span>
+      <span class="chip-dark">国家二级拳击裁判员证</span>
+      <span class="chip-dark">国家二级羽毛球裁判证</span>
+      <span class="chip-dark">国家三级武术套路裁判员证</span>
+      <span class="chip-dark">国家跳绳社会指导员证</span>
+      <span class="chip-dark">体育教师资格证</span>
+      <span class="chip-dark">美国拳击协会拳击官员执照</span>
+      <span class="chip-dark">NSCA-TSAC-F</span>
+      <span class="chip-dark">AHA CPR/AED</span>
+      <span class="chip-dark">数据分析师资格证</span>
+      <span class="chip-light">托福 iBT 93</span>
+      <span class="chip-light">中文 — 母语</span>
+    </div>
+  </div>
+  <div data-lang="en">
+    <div class="sec-title">Certifications</div>
+    <div class="chips-wrap">
+      <span class="chip-dark">National L2 Boxing Athlete Certificate</span>
+      <span class="chip-dark">National L2 Boxing Referee Certificate</span>
+      <span class="chip-dark">National L2 Badminton Referee Certificate</span>
+      <span class="chip-dark">National L3 Wushu Routines Referee Certificate</span>
+      <span class="chip-dark">National Jump Rope Instructor Certificate</span>
+      <span class="chip-dark">PE Teacher Qualification Certificate</span>
+      <span class="chip-dark">USA Boxing Officials License</span>
+      <span class="chip-dark">NSCA TSAC-F</span>
+      <span class="chip-dark">AHA CPR / AED</span>
+      <span class="chip-dark">Data Analyst Qualification Certificate</span>
+      <span class="chip-light">TOEFL iBT 93</span>
+      <span class="chip-light">English — Professional</span>
+      <span class="chip-light">Chinese — Native</span>
+    </div>
+  </div>
+
+  <div style="height:1.5rem"></div>
+</div>
+
+<script>
+  new QRCode(document.getElementById("qrcode"), {
+    text: "https://chenmiaoheprofile-keephungry.streamlit.app",
+    width: 160,
+    height: 160,
+    colorDark: "#111111",
+    colorLight: "#ffffff",
+    correctLevel: QRCode.CorrectLevel.M
+  });
+
+  function setLang(lang) {
+    document.querySelectorAll('[data-lang]').forEach(el => {
+      el.classList.toggle('active', el.dataset.lang === lang);
+    });
+    document.getElementById('btn-zh').classList.toggle('active', lang === 'zh');
+    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+    document.documentElement.lang = lang;
+  }
+</script>
+</body>
+</html>
